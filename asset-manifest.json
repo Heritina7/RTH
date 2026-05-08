@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/RTH/static/css/main.e65d4f31.css",
+    "main.js": "/RTH/static/js/main.e4a0149f.js",
+    "static/js/453.69a0b054.chunk.js": "/RTH/static/js/453.69a0b054.chunk.js",
+    "static/media/bg.jpg": "/RTH/static/media/bg.ce64c585f27b0825912d.jpg",
+    "static/media/fa-solid-900.ttf": "/RTH/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
+    "static/media/fa-brands-400.ttf": "/RTH/static/media/fa-brands-400.1815e00441357e01619e.ttf",
+    "static/media/fa-solid-900.woff2": "/RTH/static/media/fa-solid-900.2463b90d9a316e4e5294.woff2",
+    "static/media/logo.png": "/RTH/static/media/logo.a4003a87f9b79f55f8fc.png",
+    "static/media/fa-brands-400.woff2": "/RTH/static/media/fa-brands-400.c210719e60948b211a12.woff2",
+    "static/media/bg.png": "/RTH/static/media/bg.2b0d4728d09d3d4d0c78.png",
+    "static/media/fa-regular-400.ttf": "/RTH/static/media/fa-regular-400.914997e1bdfc990d0897.ttf",
+    "static/media/web.png": "/RTH/static/media/web.e6aa675b6e5ec9c1fdbd.png",
+    "static/media/Ass.png": "/RTH/static/media/Ass.9ed1554e7b32d2f9641c.png",
+    "static/media/graph.png": "/RTH/static/media/graph.c5634970325e4b6bd3ff.png",
+    "static/media/portfolio.png": "/RTH/static/media/portfolio.7ebeee95ef958d327ff0.png",
+    "static/media/im3.jpg": "/RTH/static/media/im3.39aca7a43cd5ab09d5e5.jpg",
+    "static/media/fa-regular-400.woff2": "/RTH/static/media/fa-regular-400.89999bdf5d835c012025.woff2",
+    "static/media/im1.jpg": "/RTH/static/media/im1.d812a197c9f41dd5541d.jpg",
+    "static/media/bghover.png": "/RTH/static/media/bghover.58dd5e0c8549d2c7e4b4.png",
+    "static/media/im2.jpg": "/RTH/static/media/im2.1ebb09f72f1d2e400910.jpg",
+    "static/media/fa-v4compatibility.ttf": "/RTH/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
+    "static/media/plan.png": "/RTH/static/media/plan.81ccc1f48c789f62186b.png",
+    "static/media/fa-v4compatibility.woff2": "/RTH/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
+    "index.html": "/RTH/index.html",
+    "main.e65d4f31.css.map": "/RTH/static/css/main.e65d4f31.css.map",
+    "main.e4a0149f.js.map": "/RTH/static/js/main.e4a0149f.js.map",
+    "453.69a0b054.chunk.js.map": "/RTH/static/js/453.69a0b054.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e65d4f31.css",
+    "static/js/main.e4a0149f.js"
+  ]
+}
