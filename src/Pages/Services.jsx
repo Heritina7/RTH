@@ -1,0 +1,171 @@
+import im1 from '../Assets/im1.jpg';
+import im2 from '../Assets/im2.jpg';
+import im3 from '../Assets/im3.jpg';
+import im4 from '../Assets/im4.jpg';
+import graph from '../Assets/Service/graph.png';
+import Ass from '../Assets/Service/Ass.png';
+import web from '../Assets/Service/web.png';
+import plan from '../Assets/Service/plan.png';
+import maint from '../Assets/Service/maint.gif';
+import Navbar from "../Components/Navbar";
+
+const CheckIcon = () => (
+  <svg className="w-5 h-5 text-cyan-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+  </svg>
+);
+
+export default function Home() {
+  const services = [
+    { title: "Graphiste & Designer", img: graph, desc: "Identité visuelle & UI/UX" },
+    { title: "Assistant Virtuel", img: Ass, desc: "Support & Gestion administrative" },
+    { title: "Création Web", img: web, desc: "Sites modernes & Performance" },
+    { title: "Community Manager", img: plan, desc: "Stratégie & Visibilité sociale" },
+    { title: "Maintenance", img: maint, desc: "Sécurité & Mises à jour" },
+  ];
+
+  const argumentsVente = [
+    "Hébergement gratuit pendant 1 an",
+    "Optimisé sur la performance et la SEO",
+    "Abonnement annuel à moitié prix",
+    "Mises à jours gratuites tous les 6 mois",
+    "Design responsive (PC, tablette, smartphone)",
+    "Livraison en moins d’une semaine"
+  ];
+
+  return (
+    <div className="bg-[#0a0f1a] text-white min-h-screen w-full relative font-sans overflow-x-hidden">
+      
+      {/* EFFETS DE FOND FIXES */}
+      <div className="fixed top-0 left-0 w-[50%] h-[50%] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="fixed bottom-0 right-0 w-[50%] h-[50%] bg-purple-500/10 blur-[120px] rounded-full pointer-events-none translate-x-1/2 translate-y-1/2"></div>
+
+      <div className="relative z-10 px-4 sm:px-8 md:px-16 py-8 max-w-[1600px] mx-auto">
+        <Navbar />
+
+        {/* 1. SECTION EXPERTISE (HERO SECTION) */}
+        <header className="mt-16 md:mt-28 flex flex-col items-center">
+          <div className="text-center max-w-4xl mb-16">
+            <span className="text-cyan-400 text-xs md:text-sm font-bold tracking-[0.4em] uppercase mb-4 block">Expertise Digitale</span>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-6 bg-gradient-to-b from-white to-gray-500 bg-clip-text text-transparent">
+              Propulsez votre Vision.
+            </h1>
+            <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+              De la conception graphique au développement web sur mesure, nous transformons vos idées en solutions numériques performantes.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full">
+            {services.map((service, index) => (
+              <div key={index} className="group relative bg-white/5 border border-white/10 backdrop-blur-md p-6 rounded-[2rem] flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-2 hover:border-cyan-500/50 hover:bg-white/10">
+                <img src={service.img} alt="" className="h-12 w-12 mb-4 object-contain group-hover:scale-110 transition-transform" />
+                <h3 className="text-sm font-bold text-white mb-1 tracking-tight">{service.title}</h3>
+                <p className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">{service.desc}</p>
+              </div>
+            ))}
+          </div>
+        </header>
+
+        {/* 2. SECTION NOS OFFRES (PRICING) */}
+        <section className="mt-32 md:mt-48">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Nos Forfaits</h2>
+            <div className="h-1 w-20 bg-cyan-500 mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+            {/* Site Vitrine */}
+            <div className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] hover:bg-white/[0.07] transition-all">
+              <h3 className="text-xl font-bold mb-4">Site Vitrine</h3>
+              <div className="text-3xl font-black mb-6">500.000 Ar <span className="text-xs text-gray-500 font-normal">min</span></div>
+              <ul className="space-y-3 mb-8 text-sm text-gray-300">
+                <li className="flex items-center"><CheckIcon/> Présentation Business / Entreprise</li>
+                <li className="flex items-center"><CheckIcon/> CV ou Portfolio en ligne</li>
+                <li className="flex items-center"><CheckIcon/> 4 à 5 pages sur mesure</li>
+                <li className="flex items-center"><CheckIcon/> Mail Pro personnalisé</li>
+                <li className="text-cyan-400 font-bold text-[10px] tracking-tighter uppercase mt-4">+ 100.000 Ar Retouche Photos</li>
+              </ul>
+              <div className="text-[10px] text-gray-600 italic uppercase">Ex: Intranet, Site Corporate...</div>
+            </div>
+
+            {/* Site Catalogue (Le plus populaire) */}
+            <div className="relative bg-gradient-to-b from-cyan-500/20 to-transparent border-2 border-cyan-500/50 p-8 rounded-[2.5rem] shadow-[0_20px_50px_rgba(6,182,212,0.15)] lg:-translate-y-4">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[10px] font-black px-4 py-1 rounded-full uppercase">Recommandé</div>
+              <h3 className="text-xl font-bold mb-4">Site Catalogue</h3>
+              <div className="text-3xl font-black mb-6">800.000 Ar <span className="text-xs text-cyan-400/60 font-normal">tout inclus</span></div>
+              <ul className="space-y-3 mb-8 text-sm text-gray-200 font-medium">
+                <li className="flex items-center"><CheckIcon/> Tout le pack Vitrine</li>
+                <li className="flex items-center"><CheckIcon/> Présentation de vos produits</li>
+                <li className="flex items-center"><CheckIcon/> <b>Espace Admin de gestion</b></li>
+                <li className="flex items-center"><CheckIcon/> Panier virtuel de commande</li>
+                <li className="flex items-center"><CheckIcon/> 10 à 15 pages</li>
+                <li className="text-cyan-400 font-bold text-[10px] tracking-tighter uppercase mt-4">+ 200.000 Ar Retouche Photos</li>
+              </ul>
+              <div className="text-[10px] text-gray-400 italic uppercase">Ex: Catalogue de Vente, Showroom...</div>
+            </div>
+
+            {/* App sur mesure */}
+            <div className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] hover:bg-white/[0.07] transition-all">
+              <h3 className="text-xl font-bold mb-4">Web App & Mobile</h3>
+              <div className="text-3xl font-black text-purple-400 mb-6 tracking-tight">Sur Devis</div>
+              <ul className="space-y-3 mb-8 text-sm text-gray-300">
+                <li className="flex items-center"><CheckIcon/> Fonctionnalités métier avancées</li>
+                <li className="flex items-center"><CheckIcon/> Connexion sécurisée & Sessions</li>
+                <li className="flex items-center"><CheckIcon/> Multi-plateforme (PC/Mobile)</li>
+                <li className="flex items-center"><CheckIcon/> Interface Admin intelligente</li>
+                <li className="flex items-center"><CheckIcon/> Maintenance & Updates inclus</li>
+              </ul>
+              <div className="text-[10px] text-gray-600 italic uppercase">Ex: Gestion Stock, Personnel, ERP...</div>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. SECTION POURQUOI NOUS (VALEURS) */}
+        <section className="mt-32">
+          <div className="bg-gradient-to-br from-white/10 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-16">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-1">
+                <h2 className="text-3xl font-bold mb-4">Pourquoi nous faire confiance ?</h2>
+                <p className="text-gray-400 text-sm">Nous garantissons une qualité technique irréprochable et un accompagnement continu.</p>
+              </div>
+              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {argumentsVente.map((arg, i) => (
+                  <div key={i} className="flex items-center p-4 bg-black/20 rounded-2xl border border-white/5">
+                    <CheckIcon />
+                    <span className="text-xs font-bold uppercase tracking-wider">{arg}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. SECTION RÉALISATIONS (PORTFOLIO) */}
+        <section className="my-32">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <span className="text-cyan-400 text-xs font-bold tracking-[0.3em] uppercase mb-2 block">Portfolio</span>
+              <h2 className="text-3xl md:text-4xl font-bold">Projets récents</h2>
+            </div>
+            <button className="hidden md:block text-xs font-bold border-b-2 border-cyan-500 pb-1 hover:text-cyan-500 transition-colors uppercase tracking-widest">
+              Voir tout
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div className="md:col-span-8 h-[300px] md:h-[400px] overflow-hidden rounded-[2.5rem] relative group border border-white/10">
+              <img src={im1} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                 <p className="font-bold tracking-widest uppercase">Découvrir le projet</p>
+              </div>
+            </div>
+            <div className="md:col-span-4 h-[300px] md:h-[400px] overflow-hidden rounded-[2.5rem] relative group border border-white/10">
+              <img src={im2} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  );
+}
