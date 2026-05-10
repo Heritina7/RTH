@@ -77,13 +77,13 @@ export default function Home() {
             {/* Site Vitrine */}
             <div className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] hover:bg-white/[0.07] transition-all">
               <h3 className="text-xl font-bold mb-4">Site Vitrine</h3>
-              <div className="text-3xl font-black mb-6">500.000 Ar <span className="text-xs text-gray-500 font-normal">min</span></div>
+              <div className="text-3xl font-black mb-6">100£ 500.000 MGA <span className="text-xs text-gray-500 font-normal">min</span></div>
               <ul className="space-y-3 mb-8 text-sm text-gray-300">
                 <li className="flex items-center"><CheckIcon/> Présentation Business / Entreprise</li>
                 <li className="flex items-center"><CheckIcon/> CV ou Portfolio en ligne</li>
                 <li className="flex items-center"><CheckIcon/> 4 à 5 pages sur mesure</li>
                 <li className="flex items-center"><CheckIcon/> Mail Pro personnalisé</li>
-                <li className="text-cyan-400 font-bold text-[10px] tracking-tighter uppercase mt-4">+ 100.000 Ar Retouche Photos</li>
+                <li className="text-cyan-400 font-bold text-[10px] tracking-tighter uppercase mt-4">+ 20£ (100.000 MGA) Retouche Photos</li>
               </ul>
               <div className="text-[10px] text-gray-600 italic uppercase">Ex: Intranet, Site Corporate...</div>
             </div>
@@ -92,14 +92,14 @@ export default function Home() {
             <div className="relative bg-gradient-to-b from-cyan-500/20 to-transparent border-2 border-cyan-500/50 p-8 rounded-[2.5rem] shadow-[0_20px_50px_rgba(6,182,212,0.15)] lg:-translate-y-4">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[10px] font-black px-4 py-1 rounded-full uppercase">Recommandé</div>
               <h3 className="text-xl font-bold mb-4">Site Catalogue</h3>
-              <div className="text-3xl font-black mb-6">800.000 Ar <span className="text-xs text-cyan-400/60 font-normal">tout inclus</span></div>
+              <div className="text-3xl font-black mb-6">160£ (800.000 MGA) <span className="text-xs text-cyan-400/60 font-normal">tout inclus</span></div>
               <ul className="space-y-3 mb-8 text-sm text-gray-200 font-medium">
                 <li className="flex items-center"><CheckIcon/> Tout le pack Vitrine</li>
                 <li className="flex items-center"><CheckIcon/> Présentation de vos produits</li>
                 <li className="flex items-center"><CheckIcon/> <b>Espace Admin de gestion</b></li>
                 <li className="flex items-center"><CheckIcon/> Panier virtuel de commande</li>
                 <li className="flex items-center"><CheckIcon/> 10 à 15 pages</li>
-                <li className="text-cyan-400 font-bold text-[10px] tracking-tighter uppercase mt-4">+ 200.000 Ar Retouche Photos</li>
+                <li className="text-cyan-400 font-bold text-[10px] tracking-tighter uppercase mt-4">+ 40£ (200.000 MGA) Retouche Photos</li>
               </ul>
               <div className="text-[10px] text-gray-400 italic uppercase">Ex: Catalogue de Vente, Showroom...</div>
             </div>
