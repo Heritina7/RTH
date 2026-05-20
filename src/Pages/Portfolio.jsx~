@@ -2,8 +2,6 @@ import { useState } from "react";
 import portfolioIcon from "../Assets/icone/portfolio.png";
 import vitrineImage from "../Assets/bg.png";
 import hoverImage from "../Assets/bghover.png";
-import immo from "../Assets/portfolio/immo.png";
-import hoverimmo from "../Assets/portfolio/hoverimmo.png";
 import Navbarform from "../Components/Navbarform";
 
 export default function Produit() {
@@ -23,10 +21,10 @@ export default function Produit() {
     {
       title: "Site Vitrine",
       description: "L'art de la première impression digitale, épurée et impactante.",
-      image: immo,
-      imagehover: hoverimmo,
+      image: vitrineImage,
+      imagehover: hoverImage,
       categorie: "VITRINE",
-      lien: "https://rthimmo.netlify.app", // <-- AJOUT DU LIEN ICI
+      lien: "https://votre-lien-ici.com/vitrine", // <-- AJOUT DU LIEN ICI
     },
     {
       title: "Site Catalogue",
