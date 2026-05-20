@@ -22,7 +22,7 @@ export default function Produit() {
   const services = [
     {
       title: "Site Vitrine",
-      description: "L'art de la première impression digitale, épurée et impactante.",
+      description: "Site presentation et catalogue d'une site immobilier.",
       image: immo,
       imagehover: hoverimmo,
       categorie: "VITRINE",
