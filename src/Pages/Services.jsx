@@ -1,7 +1,6 @@
+import React from 'react';
 import im1 from '../Assets/im1.jpg';
 import im2 from '../Assets/im2.jpg';
-import im3 from '../Assets/im3.jpg';
-import im4 from '../Assets/im4.jpg';
 import graph from '../Assets/Service/graph.png';
 import Ass from '../Assets/Service/Ass.png';
 import web from '../Assets/Service/web.png';
@@ -15,7 +14,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-export default function Home() {
+export default function Services() {
   const services = [
     { title: "Graphiste & Designer", img: graph, desc: "Identité visuelle & UI/UX" },
     { title: "Assistant Virtuel", img: Ass, desc: "Support & Gestion administrative" },
@@ -46,16 +45,17 @@ export default function Home() {
         {/* 1. SECTION EXPERTISE (HERO SECTION) */}
         <header className="mt-16 md:mt-28 flex flex-col items-center">
           <div className="text-center max-w-4xl mb-16">
-            <span className="text-cyan-400 text-xs md:text-sm font-bold tracking-[0.4em] uppercase mb-4 block">Expertise Digitale</span>
+            <span className="text-cyan-400 text-xs md:text-sm font-bold tracking-[0.4em] uppercase mb-4 block">Expertise Digitale & Infrastructure</span>
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-6 bg-gradient-to-b from-white to-gray-500 bg-clip-text text-transparent">
               Propulsez votre Vision.
             </h1>
             <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              De la conception graphique au développement web sur mesure, nous transformons vos idées en solutions numériques performantes.
+              De la conception graphique au développement web, jusqu'à l'architecture de vos infrastructures réseaux, nous créons des solutions numériques performantes et sécurisées.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full">
+          {/* Services Digitaux Principaux */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full mb-16">
             {services.map((service, index) => (
               <div key={index} className="group relative bg-white/5 border border-white/10 backdrop-blur-md p-6 rounded-[2rem] flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-2 hover:border-cyan-500/50 hover:bg-white/10">
                 <img src={service.img} alt="" className="h-12 w-12 mb-4 object-contain group-hover:scale-110 transition-transform" />
@@ -63,6 +63,60 @@ export default function Home() {
                 <p className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">{service.desc}</p>
               </div>
             ))}
+          </div>
+
+          {/* NOUVELLE SECTION : INFRASTRUCTURE & SÉCURITÉ RÉSEAU */}
+          <div className="w-full mb-16">
+            <div className="flex items-center gap-4 mb-8">
+              <h2 className="text-lg md:text-xl font-extrabold uppercase tracking-wider text-cyan-400 flex-shrink-0">Infrastructures & Sécurité Réseau</h2>
+              <div className="h-[1px] bg-gradient-to-r from-cyan-500/50 to-transparent w-full"></div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+              {[
+                { title: "Audit, conseil et Conception", desc: "Analyse de vos besoins et planification d'infrastructures fiables." },
+                { title: "Déploiement et configuration réseaux", desc: "Mise en service d'équipements et optimisation de vos flux." },
+                { title: "Sécurité réseaux", desc: "Protection active contre les menaces, pare-feu et VPN." },
+                { title: "Cloud Networking et Architecture distribuée", desc: "Interconnexion multi-sites et gestion de serveurs distants." },
+                { title: "Infogérance, Maintenance et Supervision", desc: "Suivi en temps réel de votre parc informatique et support continu." },
+                { title: "Formation et documentation", desc: "Transfert de compétences et schémas techniques complets." }
+              ].map((item, index) => (
+                <div key={index} className="group bg-white/5 border border-white/10 backdrop-blur-md p-6 rounded-3xl flex items-start gap-4 transition-all duration-300 hover:border-cyan-500/30 hover:bg-white/[0.08]">
+                  <div className="p-3 bg-cyan-500/10 rounded-xl text-cyan-400 group-hover:bg-cyan-500 group-hover:text-black transition-colors duration-300">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white mb-1">{item.title}</h4>
+                    <p className="text-xs text-gray-400 leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* NOUVELLE SECTION : CÂBLAGE STRUCTURÉ (VDI) */}
+          <div className="w-full">
+            <div className="flex items-center gap-4 mb-8">
+              <h2 className="text-lg md:text-xl font-extrabold uppercase tracking-wider text-purple-400 flex-shrink-0">Câblage Structuré & VDI</h2>
+              <div className="h-[1px] bg-gradient-to-r from-purple-500/50 to-transparent w-full"></div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+              {[
+                { title: "Conception et Architecture du cablage Structurée", desc: "Planification rigoureuse selon l'agencement de vos locaux." },
+                { title: "Pose et Raccordement du Materiel", desc: "Installation propre et raccordements (Le cœur du VDI)." },
+                { title: "Certification et Recette", desc: "Tests de performance, de conformité et validation des normes." },
+                { title: "Reperage, etiquetage et \"clean-up\"", desc: "Audit technique complet et rénovation de vos baies de brassage." }
+              ].map((item, index) => (
+                <div key={index} className="group bg-white/5 border border-white/10 backdrop-blur-md p-6 rounded-3xl text-left transition-all duration-300 hover:border-purple-500/30 hover:bg-white/[0.08]">
+                  <div className="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center font-black text-xs mb-4 group-hover:bg-purple-500 group-hover:text-black transition-colors">
+                    0{index + 1}
+                  </div>
+                  <h4 className="text-sm font-bold text-white mb-2">{item.title}</h4>
+                  <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </header>
 
@@ -88,7 +142,7 @@ export default function Home() {
               <div className="text-[10px] text-gray-600 italic uppercase">Ex: Intranet, Site Corporate...</div>
             </div>
 
-            {/* Site Catalogue (Le plus populaire) */}
+            {/* Site Catalogue */}
             <div className="relative bg-gradient-to-b from-cyan-500/20 to-transparent border-2 border-cyan-500/50 p-8 rounded-[2.5rem] shadow-[0_20px_50px_rgba(6,182,212,0.15)] lg:-translate-y-4">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[10px] font-black px-4 py-1 rounded-full uppercase">Recommandé</div>
               <h3 className="text-xl font-bold mb-4">Site Catalogue</h3>
@@ -120,7 +174,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3. SECTION POURQUOI NOUS (VALEURS) */}
+        {/* 3. SECTION POURQUOI NOUS */}
         <section className="mt-32">
           <div className="bg-gradient-to-br from-white/10 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-16">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -140,7 +194,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 4. SECTION RÉALISATIONS (PORTFOLIO) */}
+        {/* 4. SECTION RÉALISATIONS */}
         <section className="my-32">
           <div className="flex justify-between items-end mb-12">
             <div>
