@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import NavShop from "../Components/NavShop";
 import { 
-  Cpu, Terminal, Target, ArrowRight, ShieldCheck, 
+  Cpu, Terminal, Zap, Target, ArrowRight, ShieldCheck, 
   Music, Monitor, Gift, Rocket, BadgePercent, Wrench, HardDrive, Network
 } from 'lucide-react';
 
@@ -40,7 +40,7 @@ const panelsData = [
     layout: "triple",
     cards: [
       { id: 'VDI-01', title: 'CÂBLAGE STRUCTURÉ', tag: 'CAT6A / CAT7', icon: Network, desc: 'Pose de goulottes et tirage de câbles Ethernet blindés.', color: '#a855f7', image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop' },
-      { id: 'VDI-02', title: 'INSTALLATION VDI ET BAIE DE BRASSAGE', tag: 'CLEAN-UP', icon: HardDrive, desc: 'Installation VDI (camera, CCTV, equipement informatique), Rangement, étiquetage et raccordement des switchs.', color: '#00f2fe', image: 'https://images.unsplash.com/photo-1563770660941-20978e870e26?q=80&w=800&auto=format&fit=crop' },
+      { id: 'VDI-02', title: 'INSTALLATION VDI ET BAIE DE BRASSAGE', tag: 'CLEAN-UP', icon: HardDrive, desc: 'Rangement, étiquetage et raccordement des switchs.', color: '#00f2fe', image: 'https://images.unsplash.com/photo-1563770660941-20978e870e26?q=80&w=800&auto=format&fit=crop' },
       { id: 'VDI-03', title: 'CERTIFICATION', tag: 'RECETTE', icon: Wrench, desc: 'Tests de performance et validation des liaisons.', color: '#ff0055', image: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=800&auto=format&fit=crop' },
     ]
   },
