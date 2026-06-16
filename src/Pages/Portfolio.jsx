@@ -28,7 +28,7 @@ export default function Produit() {
       image: login,
       imagehover: dashboard,
       categorie: "VITRINE",
-      lien: "https://rthimmo.netlify.app", // <-- AJOUT DU LIEN ICI
+      lien: "https://edurth.netlify.app", // <-- AJOUT DU LIEN ICI
     },
     {
       title: "Site Vitrine",
