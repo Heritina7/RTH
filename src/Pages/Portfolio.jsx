@@ -16,7 +16,7 @@ export default function Produit() {
     { nom: "TOUT" },
     { nom: "VITRINE" },
     { nom: "CATALOGUE" },
-    { nom: "APPLICATION" },
+    { nom: "APPLICATION WEB" },
     { nom: "APP MOBILE" },
     { nom: "GALERIE" },
   ];
@@ -27,7 +27,7 @@ export default function Produit() {
       description: "Application Web de gestion pour une établissement scolaire.(id:admin, mdp:admin123)",
       image: login,
       imagehover: dashboard,
-      categorie: "VITRINE",
+      categorie: "APPLICATION WEB",
       lien: "https://edurth.netlify.app", // <-- AJOUT DU LIEN ICI
     },
     {
