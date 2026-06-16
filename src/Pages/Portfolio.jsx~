@@ -24,9 +24,9 @@ export default function Produit() {
   const services = [
     {
       title: "App Web",
-      description: "Application Web de gestion pour une établissement scolaire.(id:admin, mdp:admin123)",
-      image: login,
-      imagehover: dashboard,
+      description: "Site presentation et catalogue d'une site immobilier.",
+      image: immo,
+      imagehover: hoverimmo,
       categorie: "VITRINE",
       lien: "https://rthimmo.netlify.app", // <-- AJOUT DU LIEN ICI
     },
