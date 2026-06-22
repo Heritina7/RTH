@@ -16,19 +16,27 @@ export default function Produit() {
     { nom: "TOUT" },
     { nom: "VITRINE" },
     { nom: "CATALOGUE" },
-    { nom: "APPLICATION" },
+    { nom: "APPLICATION WEB" },
     { nom: "APP MOBILE" },
     { nom: "GALERIE" },
   ];
 
   const services = [
     {
+      title: "Site Vitrine",
+      description: "Application Web de gestion pour une établissement scolaire.(id:admin, mdp:admin123)",
+      image: login,
+      imagehover: dashboard,
+      categorie: "APPLICATION WEB",
+      lien: "https://edurth.netlify.app", // <-- AJOUT DU LIEN ICI
+    },
+    {
       title: "App Web",
-      description: "Site presentation et catalogue d'une site immobilier.",
-      image: immo,
-      imagehover: hoverimmo,
-      categorie: "VITRINE",
-      lien: "https://rthimmo.netlify.app", // <-- AJOUT DU LIEN ICI
+      description: "Application Web de gestion pour une établissement scolaire.(id:admin, mdp:admin123)",
+      image: login,
+      imagehover: dashboard,
+      categorie: "APPLICATION WEB",
+      lien: "https://edurth.netlify.app", // <-- AJOUT DU LIEN ICI
     },
     {
       title: "Site Vitrine",

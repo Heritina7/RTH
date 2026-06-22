@@ -7,6 +7,8 @@ import hoverimmo from "../Assets/portfolio/hoverimmo.png";
 import Navbarform from "../Components/Navbarform";
 import login from "../Assets/portfolio/login.png";
 import dashboard from "../Assets/portfolio/dashboard.png";
+import comb1 from "../Assets/portfolio/KOMB/image.png";
+import comb2 from "../Assets/portfolio/KOMB/image2.png";
 
 export default function Produit() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -22,6 +24,14 @@ export default function Produit() {
   ];
 
   const services = [
+    {
+      title: "Site Vitrine",
+      description: "Application Web de gestion pour une établissement scolaire.(id:admin, mdp:admin123)",
+      image: comb1,
+      imagehover: comb2,
+      categorie: "APPLICATION WEB",
+      lien: "https://rthcombo.netlify.app", // <-- AJOUT DU LIEN ICI
+    },
     {
       title: "App Web",
       description: "Application Web de gestion pour une établissement scolaire.(id:admin, mdp:admin123)",
