@@ -1,12 +1,12 @@
 import { MdCall, MdAdd, MdShoppingCart } from "react-icons/md";
 import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom"; // Importation de Link pour la navigation réelle
+import { Link } from "react-router-dom";
 import { FaBars, FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { HiX } from "react-icons/hi";
 import { LucideSettings } from "lucide-react";
 
 const NavLinks = [
-  { nom: 'ACCUEIL', href: '/', isPage: true }, // Nouveau : pointe vers la racine
+  { nom: 'ACCUEIL', href: '/', isPage: true },
   { nom: 'DEVELOPPEMENT', index: 0 },
   { nom: 'RESEAUTIQUE', index: 1 },
   { nom: 'OFFRE', index: 2 },
@@ -29,13 +29,11 @@ export default function NavShop({ activeSection }) {
   }, []);
 
   const handleNavClick = (e, link) => {
-    // Si c'est une navigation de page (Accueil), on laisse le composant Link gérer ou on ferme juste le menu
     if (link.isPage) {
       setOpen(false);
       return;
     }
 
-    // Sinon, on gère le scroll interne
     e.preventDefault();
     if (window.scrollToSection) {
       window.scrollToSection(link.index);
@@ -50,20 +48,19 @@ export default function NavShop({ activeSection }) {
           <div className={`relative flex items-center justify-between w-full max-w-7xl mx-auto px-6 py-2 bg-white/80 backdrop-blur-md border border-white/20 shadow-2xl rounded-2xl transition-all duration-300 ${scrolled ? 'rounded-full' : ''}`}>
             
             <div className="flex-1 flex items-center">
-              {/* Le logo pointe maintenant vers Home */}
               <Link to="/" className="text-xl font-black tracking-tighter text-[#2DD298]">
                 MODERN<span className="text-gray-800">SHOP</span>
               </Link>
             </div>
 
-            {/* Menu Desktop */}
+            {/* Menu Desktop en Bleu Ciel */}
             <div className="hidden lg:flex items-center justify-center space-x-1">
               {NavLinks.map((link) => (
                 link.isPage ? (
                   <Link
                     key={link.nom}
                     to={link.href}
-                    className="px-4 py-2 text-[12px] font-bold tracking-widest text-gray-600 hover:text-[#2DD298] transition-all"
+                    className="px-4 py-2 text-[12px] font-bold tracking-widest text-gray-600 hover:text-sky-400 transition-colors"
                   >
                     {link.nom}
                   </Link>
@@ -71,8 +68,8 @@ export default function NavShop({ activeSection }) {
                   <button
                     key={link.nom}
                     onClick={(e) => handleNavClick(e, link)}
-                    className={`px-4 py-2 text-[12px] font-bold tracking-widest transition-all duration-300 rounded-xl ${
-                      activeSection === link.nom ? 'text-[#2DD298] bg-[#2DD298]/10' : 'text-gray-600 hover:text-[#2DD298]'
+                    className={`px-4 py-2 text-[12px] font-bold tracking-widest transition-colors ${
+                      activeSection === link.nom ? 'text-sky-400' : 'text-gray-600 hover:text-sky-400'
                     }`}
                   >
                     {link.nom}
@@ -81,14 +78,15 @@ export default function NavShop({ activeSection }) {
               ))}
             </div>
 
+            {/* Liens Droite en Bleu Ciel (Texte + Icône) */}
             <div className="flex-1 hidden lg:flex items-center justify-end space-x-4">
               {RightLinks.map((link) => (
                 <Link
                   key={link.nom}
                   to={link.href}
-                  className="flex items-center gap-2 px-3 py-2 text-[12px] font-bold text-gray-700 hover:text-[#2DD298] transition-colors border-l border-gray-100 first:border-0"
+                  className="group flex items-center gap-2 px-3 py-2 text-[12px] font-bold text-gray-700 hover:text-sky-400 transition-colors border-l border-gray-100 first:border-0"
                 >
-                  <link.icon size={18} />
+                  <link.icon size={18} className="text-gray-700 group-hover:text-sky-400 transition-colors" />
                   <span className="tracking-widest">{link.nom}</span>
                 </Link>
               ))}
@@ -110,7 +108,7 @@ export default function NavShop({ activeSection }) {
                   key={link.nom} 
                   to={link.href} 
                   onClick={() => setOpen(false)}
-                  className="text-left text-lg font-semibold text-gray-800 border-b border-gray-50 pb-2"
+                  className="text-left text-lg font-semibold text-gray-800 hover:text-sky-400 transition-colors border-b border-gray-50 pb-2"
                 >
                   {link.nom}
                 </Link>
@@ -118,7 +116,7 @@ export default function NavShop({ activeSection }) {
                 <button 
                   key={link.nom} 
                   onClick={(e) => handleNavClick(e, link)} 
-                  className="text-left text-lg font-semibold text-gray-800 border-b border-gray-50 pb-2"
+                  className="text-left text-lg font-semibold text-gray-800 hover:text-sky-400 transition-colors border-b border-gray-50 pb-2"
                 >
                   {link.nom}
                 </button>
@@ -128,9 +126,8 @@ export default function NavShop({ activeSection }) {
         </div>
       </nav>
 
-      {/* --- Boutons flottants inchangés --- */}
+      {/* --- Zone Boutons Flottants --- */}
       <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-center gap-4">
-        {/* ... code des icônes whatsapp/insta/call ... */}
         <div className={`flex flex-col gap-3 transition-all duration-500 ${openico ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0 pointer-events-none'}`}>
           <a href="https://wa.me/..." target="_blank" rel="noreferrer" className="bg-[#25D366] w-12 h-12 flex items-center justify-center rounded-2xl text-white shadow-xl hover:scale-110 transition-transform"><FaWhatsapp size={20}/></a>
           <a href="#" className="bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 w-12 h-12 flex items-center justify-center rounded-2xl text-white shadow-xl hover:scale-110 transition-transform"><FaInstagram size={20}/></a>

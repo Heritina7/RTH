@@ -48,22 +48,26 @@ export default function Navbar() {
                 <Link 
                   key={nom} 
                   to={lien} 
-                  className={`px-4 py-2 text-[11px] font-bold tracking-widest rounded-full transition-all ${location.pathname === lien ? 'text-[#2DD298] bg-[#2DD298]/10' : 'text-gray-500 hover:text-gray-900'}`}
+                  className={`px-4 py-2 text-[11px] font-bold tracking-widest transition-colors ${
+                    location.pathname === lien 
+                      ? 'text-sky-400' 
+                      : 'text-gray-500 hover:text-sky-400'
+                  }`}
                 >
                   {nom}
                 </Link>
               ))}
             </div>
 
-            {/* DROITE : Devis et Formation */}
+            {/* DROITE : Devis et Formation (Icône et Texte harmonisés en couleur et survol) */}
             <div className="flex-1 hidden lg:flex items-center justify-end space-x-2">
               {PremiumLinks.map((link) => (
                 <Link
                   key={link.nom}
                   to={link.lien}
-                  className="flex items-center gap-2 px-4 py-2 text-[11px] font-bold text-gray-700 hover:text-[#2DD298] transition-colors border-l border-gray-100 first:border-0"
+                  className="group flex items-center gap-2 px-4 py-2 text-[11px] font-bold text-gray-700 hover:text-sky-400 transition-colors border-l border-gray-100 first:border-0"
                 >
-                  <link.icon size={18} className="text-[#2DD298]" />
+                  <link.icon size={18} className="text-gray-700 group-hover:text-sky-400 transition-colors" />
                   <span className="tracking-widest">{link.nom}</span>
                 </Link>
               ))}
@@ -80,11 +84,11 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div className={`fixed inset-0 bg-white/95 z-[90] lg:hidden flex flex-col items-center justify-center space-y-6 transition-all ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         {NavLinks.map(({ nom, lien }) => (
-          <Link key={nom} to={lien} onClick={() => setOpen(false)} className="text-2xl font-black text-gray-800 tracking-widest">{nom}</Link>
+          <Link key={nom} to={lien} onClick={() => setOpen(false)} className="text-2xl font-black text-gray-800 hover:text-sky-400 transition-colors tracking-widest">{nom}</Link>
         ))}
         <div className="h-[1px] w-20 bg-gray-200 my-4" />
         {PremiumLinks.map(({ nom, lien }) => (
-          <Link key={nom} to={lien} onClick={() => setOpen(false)} className="text-xl font-bold text-[#2DD298] tracking-widest">{nom}</Link>
+          <Link key={nom} to={lien} onClick={() => setOpen(false)} className="text-xl font-bold text-gray-800 hover:text-sky-400 tracking-widest transition-colors">{nom}</Link>
         ))}
       </div>
 
@@ -101,7 +105,7 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* 2. Bouton Trigger (+) - Reste Vert */}
+        {/* 2. Bouton Trigger (+) */}
         <button 
           onClick={() => setOpenico(!openico)} 
           className="w-16 h-16 rounded-2xl flex items-center justify-center text-white bg-[#2DD298] shadow-2xl transition-all active:scale-90"
@@ -109,12 +113,11 @@ export default function Navbar() {
           <MdAdd size={35} className={`transition-transform duration-300 ${openico ? 'rotate-45' : 'rotate-0'}`} />
         </button>
 
-        {/* 3. Bouton COMMANDER - Même taille (w-16 h-16) et placé en dessous */}
+        {/* 3. Bouton COMMANDER */}
         <Link 
           to="/Devis" 
           className="group relative w-16 h-16 flex flex-col items-center justify-center bg-gray-900 text-white rounded-2xl shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
         >
-          {/* Badge de notification discret */}
           <span className="absolute -top-1 -right-1 flex h-4 w-4">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2DD298] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-4 w-4 bg-[#2DD298]"></span>

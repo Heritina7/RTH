@@ -9,6 +9,8 @@ import Contact from "./Pages/Contact";
 import Devis from "./Pages/Devis";
 import Contrat from "./Pages/Contrat";
 import Catalogue from "./Pages/Catalogue";
+import Blog
+ from "./Pages/Blog";
 function App() {
   return (
     
@@ -26,6 +28,7 @@ function App() {
           <Route path="devis/" element={<Devis/>}/>
           <Route path="contrat/" element={<Contrat/>}/>
           <Route path="catalogue/" element={<Catalogue/>}/>
+          <Route path="blog/" element={<Blog/>}/>
         </Routes>
       </main>
       </div>

@@ -54,7 +54,7 @@ export default function Home() {
                 <Link to="/shop"><span className="text-white/10 hidden md:inline">|</span></Link>
                 <Link to="/catalogue"><span className="hover:text-[#00f2fe] transition-colors">VISUELS</span></Link>
                 <Link to="/shop"><span className="text-white/10 hidden md:inline">|</span></Link>
-                <Link to="/shop"><span className="hover:text-[#00f2fe] transition-colors">BLOG</span></Link>
+                <Link to="/blog"><span className="hover:text-[#00f2fe] transition-colors">BLOG</span></Link>
              </div>
              <p className="text-center text-[9px] text-white/30 mt-4 tracking-[0.6em] uppercase">High Performance Standards </p>
           </Link>
