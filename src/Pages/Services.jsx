@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import im1 from '../Assets/im1.jpg';
-import im2 from '../Assets/im2.jpg';
+import im1 from '../Assets/Service/portrecent/im1.png';
+import im2 from '../Assets/Service/portrecent/im2.png';
 import graph from '../Assets/Service/graph.png';
 import Ass from '../Assets/Service/Ass.png';
 import web from '../Assets/Service/web.png';

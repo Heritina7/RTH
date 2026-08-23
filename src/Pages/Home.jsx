@@ -42,29 +42,29 @@ export default function Home() {
         {/* NAVIGATION GRID */}
         <div className="w-full max-w-5xl mx-auto space-y-4 md:space-y-6 mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 text-[#dde0e3]">
-            <MenuLink to="/Services" title="SERVICES" desc="Expertise & Solutions" />
-            <MenuLink to="/Portfolio" title="SHOP" desc="Digital Assets" />
+            <MenuLink to="/services" title="SERVICES" desc="Expertise & Solutions" />
+            <MenuLink to="/portfolio" title="SHOP" desc="Digital Assets" />
           </div>
 
           <Link to="" className="group block relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 hover:border-[#00f2fe]/30 hover:bg-white/[0.05] transition-all duration-500">
              <div className="flex flex-wrap justify-center items-center gap-4 text-[#dde0e3] text-xl md:text-3xl font-bold tracking-[0.2em] uppercase">
-                <Link to="/Shop"><span className="hover:text-[#00f2fe] transition-colors">Formation</span></Link>
-                <Link to="/Shop"><span className="text-white/10 hidden md:inline">|</span></Link>
-                <Link to="/Shop"><span className="hover:text-[#00f2fe] transition-colors">Conférence</span></Link>
-                <Link to="/Shop"><span className="text-white/10 hidden md:inline">|</span></Link>
-                <Link to="/Shop"><span className="hover:text-[#00f2fe] transition-colors">Promotion</span></Link>
-                <Link to="/Shop"><span className="text-white/10 hidden md:inline">|</span></Link>
-                <Link to="/Shop"><span className="hover:text-[#00f2fe] transition-colors">Offre</span></Link>
+                <Link to="/shop"><span className="hover:text-[#00f2fe] transition-colors">Formation</span></Link>
+                <Link to="/shop"><span className="text-white/10 hidden md:inline">|</span></Link>
+                <Link to="/shop"><span className="hover:text-[#00f2fe] transition-colors">Conférence</span></Link>
+                <Link to="/shop"><span className="text-white/10 hidden md:inline">|</span></Link>
+                <Link to="/catalogue"><span className="hover:text-[#00f2fe] transition-colors">VISUELS</span></Link>
+                <Link to="/shop"><span className="text-white/10 hidden md:inline">|</span></Link>
+                <Link to="/shop"><span className="hover:text-[#00f2fe] transition-colors">BLOG</span></Link>
              </div>
-             <p className="text-center text-[9px] text-white/30 mt-4 tracking-[0.6em] uppercase">High Performance Standards</p>
+             <p className="text-center text-[9px] text-white/30 mt-4 tracking-[0.6em] uppercase">High Performance Standards </p>
           </Link>
         </div>
 
         {/* FOOTER */}
         <div className="w-full flex justify-center items-center">
           <div className="flex space-x-10 text-[16px] uppercase tracking-[0.4em] text-white/40 border-t border-white/50 pt-8 px-12">
-            <Link to="/Propos" className="hover:text-[#00f2fe] transition-colors">À propos</Link>
-            <Link to="/Contact" className="hover:text-[#00f2fe] transition-colors">Contact</Link>
+            <Link to="/propos" className="hover:text-[#00f2fe] transition-colors">À propos</Link>
+            <Link to="/contact" className="hover:text-[#00f2fe] transition-colors">Contact</Link>
           </div>
         </div>
       </div>
