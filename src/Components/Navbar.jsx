@@ -32,7 +32,7 @@ export default function Navbar() {
     <>
       <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${scrolled ? 'py-3' : 'py-6'}`}>
         <div className="container mx-auto px-4 flex justify-center">
-          <div className={`flex items-center justify-between w-full max-w-7xl px-6 py-2 bg-white/70 backdrop-blur-xl border border-white/40 shadow-lg rounded-[2rem]`}>
+          <div className={`flex items-center justify-between w-full max-w-7xl px-6 py-2 bg-white backdrop-blur-xl border border-white/40 shadow-lg rounded-[2rem]`}>
             
             {/* GAUCHE : Logo */}
             <div className="flex-1">
@@ -51,7 +51,7 @@ export default function Navbar() {
                   className={`px-4 py-2 text-[11px] font-bold tracking-widest transition-colors ${
                     location.pathname === lien 
                       ? 'text-sky-400' 
-                      : 'text-gray-500 hover:text-sky-400'
+                      : 'text-black hover:text-[#2DD298]'
                   }`}
                 >
                   {nom}
@@ -65,9 +65,9 @@ export default function Navbar() {
                 <Link
                   key={link.nom}
                   to={link.lien}
-                  className="group flex items-center gap-2 px-4 py-2 text-[11px] font-bold text-gray-700 hover:text-sky-400 transition-colors border-l border-gray-100 first:border-0"
+                  className="group flex items-center gap-2 px-4 py-2 text-[11px] font-bold text-black hover:text-[#2DD298] transition-colors border-l border-gray-100 first:border-0"
                 >
-                  <link.icon size={18} className="text-gray-700 group-hover:text-sky-400 transition-colors" />
+                  <link.icon size={18} className="text-gray-500 group-hover:text-[#2DD298] transition-colors" />
                   <span className="tracking-widest">{link.nom}</span>
                 </Link>
               ))}

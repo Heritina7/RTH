@@ -1,5 +1,7 @@
 import React from 'react';
-import bgImage from "../Assets/bg.jpg";
+// 1. Convertissez votre image bg.jpg en bg.webp (et bg.avif si possible)
+import bgImageWebp from "../Assets/bg.webp"; 
+import bgImageJpg from "../Assets/bg.jpg"; // Fallback pour anciens navigateurs
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from 'lucide-react';
 
@@ -7,17 +9,19 @@ export default function Home() {
   return (
     <div className="relative w-full h-screen overflow-hidden font-mono selection:bg-[#00f2fe] selection:text-black bg-black">
       
-      {/* CALQUE D'IMAGE ANIMÉ 
-          - On agrandit légèrement l'image (w-[120%]) pour avoir de la marge pour le mouvement.
-          - On applique l'animation personnalisée 'pan-horizontal'
-      */}
-      <div 
-        className="absolute inset-0 w-[120%] h-full bg-cover bg-center animate-bg-pan opacity-60"
-        style={{ 
-          backgroundImage: `url(${bgImage})`,
-          left: '0' 
-        }}
-      />
+      {/* CALQUE D'IMAGE OPTIMISÉ ET ANIMÉ */}
+      <div className="absolute inset-0 w-[120%] h-full animate-bg-pan opacity-60 pointer-events-none">
+        <picture>
+          <source srcSet={bgImageWebp} type="image/webp" />
+          <img 
+            src={bgImageJpg} 
+            alt="RTH Background"
+            loading="eager"
+            fetchPriority="high"
+            className="w-full h-full object-cover object-center"
+          />
+        </picture>
+      </div>
       
       {/* Overlay de dégradé pour la lisibilité et l'effet tech */}
       <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-80" />
@@ -46,18 +50,18 @@ export default function Home() {
             <MenuLink to="/portfolio" title="SHOP" desc="Digital Assets" />
           </div>
 
-          <Link to="" className="group block relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 hover:border-[#00f2fe]/30 hover:bg-white/[0.05] transition-all duration-500">
+          <div className="group block relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-md p-8 md:p-12 hover:border-[#00f2fe]/30 hover:bg-white/[0.05] transition-all duration-500">
              <div className="flex flex-wrap justify-center items-center gap-4 text-[#dde0e3] text-xl md:text-3xl font-bold tracking-[0.2em] uppercase">
                 <Link to="/shop"><span className="hover:text-[#00f2fe] transition-colors">Formation</span></Link>
-                <Link to="/shop"><span className="text-white/10 hidden md:inline">|</span></Link>
+                <span className="text-white/10 hidden md:inline">|</span>
                 <Link to="/shop"><span className="hover:text-[#00f2fe] transition-colors">Conférence</span></Link>
-                <Link to="/shop"><span className="text-white/10 hidden md:inline">|</span></Link>
+                <span className="text-white/10 hidden md:inline">|</span>
                 <Link to="/catalogue"><span className="hover:text-[#00f2fe] transition-colors">VISUELS</span></Link>
-                <Link to="/shop"><span className="text-white/10 hidden md:inline">|</span></Link>
+                <span className="text-white/10 hidden md:inline">|</span>
                 <Link to="/blog"><span className="hover:text-[#00f2fe] transition-colors">BLOG</span></Link>
              </div>
              <p className="text-center text-[9px] text-white/30 mt-4 tracking-[0.6em] uppercase">High Performance Standards </p>
-          </Link>
+          </div>
         </div>
 
         {/* FOOTER */}
@@ -69,7 +73,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* CSS ANIMATION POUR LE MOUVEMENT GAUCHE-DROITE */}
+      {/* CSS ANIMATION */}
       <style jsx>{`
         @keyframes bg-pan {
           0% { transform: translateX(0%); }
@@ -78,6 +82,7 @@ export default function Home() {
         }
         .animate-bg-pan {
           animation: bg-pan 20s ease-in-out infinite;
+          will-change: transform;
         }
       `}</style>
     </div>
