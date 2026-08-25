@@ -1,7 +1,6 @@
 import React from 'react';
-// 1. Convertissez votre image bg.jpg en bg.webp (et bg.avif si possible)
 import bgImageWebp from "../Assets/bg.webp"; 
-import bgImageJpg from "../Assets/bg.jpg"; // Fallback pour anciens navigateurs
+import bgImageJpg from "../Assets/bg.jpg"; 
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from 'lucide-react';
 
@@ -10,7 +9,7 @@ export default function Home() {
     <div className="relative w-full h-screen overflow-hidden font-mono selection:bg-[#00f2fe] selection:text-black bg-black">
       
       {/* CALQUE D'IMAGE OPTIMISÉ ET ANIMÉ */}
-      <div className="absolute inset-0 w-[120%] h-full animate-bg-pan opacity-60 pointer-events-none">
+      <div className="absolute inset-0 w-[120%] h-full animate-bg-pan opacity-60 pointer-events-none -translate-x-[10%]">
         <picture>
           <source srcSet={bgImageWebp} type="image/webp" />
           <img 
@@ -77,11 +76,11 @@ export default function Home() {
       <style jsx>{`
         @keyframes bg-pan {
           0% { transform: translateX(0%); }
-          50% { transform: translateX(-15%); }
+          50% { transform: translateX(-10%); }
           100% { transform: translateX(0%); }
         }
         .animate-bg-pan {
-          animation: bg-pan 20s ease-in-out infinite;
+          animation: bg-pan 25s ease-in-out infinite;
           will-change: transform;
         }
       `}</style>
