@@ -1,5 +1,5 @@
 [build]
-  publish = "build"
+  publish = "dist"
   command = "npm run build"
 
 # Gestion SPA React (redirection pour éviter les erreurs 404 au rafraîchissement)
