@@ -284,21 +284,21 @@ export default function Services() {
 
             {/* Web App */}
             <PricingCard
-              title="Web App & Mobile"
+              title="OFFRE B2B & PARTENAIRE"
               price="Sur Devis"
-              note=""
+              note="MODERNISATION 100%"
               badge={null}
               highlighted={false}
               priceColor="#c084fc"
               items={[
                 "Fonctionnalités métier avancées",
-                "Connexion sécurisée & Sessions",
-                "Multi-plateforme (PC / Mobile)",
-                "Interface Admin intelligente",
-                "Maintenance & Updates inclus",
+                "Migration de stack & optimisation des performances",
+                "Refonte technique & graphique sur mesure",
+                "Intégration de votre propre branding",
+                "Confidentialité absolue garantie",
               ]}
               addon=""
-              footnote="Ex: Gestion Stock, Personnel, ERP..."
+              footnote="EX: REFONTE, MODERNISATION, ERP..."
             />
           </div>
         </section>

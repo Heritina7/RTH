@@ -1,320 +1,769 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useNavigate, Link } from 'react-router-dom';
+import imgMembre1 from '../Assets/images/mission2.png';
+import imgMembre2 from '../Assets/images/mission2.png';
+import imgMembre3 from '../Assets/images/mission2.png';
+// Importez vos images ici (ou utilisez vos variables d'images existantes)
+import imgMission1 from '../Assets/images/mission1.png';
+import imgMission2 from '../Assets/images/mission2.png';
+import imgMission3 from '../Assets/images/mission3.jpg';
+import imgMission4 from '../Assets/images/mission4.jpg';
+import imgMission5 from '../Assets/images/mission5.png';
+import imgMission6 from '../Assets/images/mission6.png';
 
-// Importation du logo RTH
-import logo from '../Assets/logo.png'; 
 
-// Importation des photos de l'équipe
-import photoJean from '../Assets/jean.jpg'; 
-import photoAlice from '../Assets/alice.jpg'; 
-import photoBob from '../Assets/bob.jpg'; 
 
-// IMPORTATION DES ICÔNES DE TECHNOLOGIES (react-icons/si pour Simple Icons)
-import { 
-  SiPython, SiJavascript, SiReact, SiNextdotjs, 
-  SiTailwindcss, SiNodedotjs, SiTypescript, SiFigma 
-} from 'react-icons/si';
+// 1. Importez React (si ce n'est pas déjà fait)
 
-import { 
-  Shield, Globe, Cpu, 
-  ArrowUpRight, Fingerprint, ChevronLeft,
-  Layout, Palette, Share2, Rocket, Headphones, Users, BookOpen, Monitor, Code2
-} from 'lucide-react';
 
-// DONNÉES DE L'ÉQUIPE AVEC LIENS
-const teamMembers = [
-  {
-    name: "Jean R. Rakoto",
-    role: "Fondateur / Lead Dev",
-    photo: photoJean,
-    link: "/equipe/jean-rakoto"
-  },
-  {
-    name: "Alice Dubois",
-    role: "UI/UX Designer",
-    photo: photoAlice,
-    link: "/equipe/alice-dubois"
-  },
-  {
-    name: "Bob Smith",
-    role: "Expert DevOps",
-    photo: photoBob,
-    link: "/equipe/bob-smith"
-  }
-];
+// 2. Importez vos images (remplacez les chemins par l'emplacement réel de vos fichiers dans votre projet)
+import iconeRelation from '../Assets/propos/relation.png';
+import iconeTravail from '../Assets/propos/travail.png';
+import iconeHonneur from '../Assets/propos/honneur.png';
+import { useEffect, useState, useRef } from 'react';
+import monImage from '../Assets/propos/bg.jpg';
+import engagement from '../Assets/propos/engagement.png';
+import Imagevaleur from '../Assets/propos/valeur.jpg';
+import monImage2 from '../Assets/propos/bg1.jpg';
+import histoire from '../Assets/propos/histoire.png';
 
-// DONNÉES DE LA STACK TECHNIQUE AVEC ICÔNES ET COULEURS SPÉCIFIQUES
-const techStack = [
-  { 
-    name: "Python", 
-    icon: SiPython, 
-    color: "#3776AB", // Couleur officielle Python
-  },
-  { 
-    name: "JavaScript", 
-    icon: SiJavascript, 
-    color: "#F7DF1E", // Couleur officielle JS
-  },
-  { 
-    name: "TypeScript", 
-    icon: SiTypescript, 
-    color: "#3178C6", // Couleur officielle TS
-  },
-  { 
-    name: "React", 
-    icon: SiReact, 
-    color: "#61DAFB", // Couleur officielle React
-  },
-  { 
-    name: "Next.js", 
-    icon: SiNextdotjs, 
-    color: "#ffffff", // Blanc (sur fond sombre)
-  },
-  { 
-    name: "Node.js", 
-    icon: SiNodedotjs, 
-    color: "#339933", // Couleur officielle Node
-  },
-  { 
-    name: "Tailwind", 
-    icon: SiTailwindcss, 
-    color: "#06B6D4", // Couleur officielle Tailwind
-  },
-  { 
-    name: "Figma", 
-    icon: SiFigma, 
-    color: "#F24E1E", // Couleur officielle Figma
-  },
-];
+// --- Section 1 : Hero avec flèche et transition lente ---
+export function HeroSection() {
+  const scrollToSection = (e, targetId) => {
+    e.preventDefault();
+    const target = document.getElementById(targetId);
+    if (!target) return; // Évite les erreurs si l'élément n'existe pas encore
 
-const AboutBento = () => {
-  const navigate = useNavigate();
+    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      const ease = progress < 0.5 
+        ? 2 * progress * progress 
+        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
+      window.scrollTo(0, startPosition + distance * ease);
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
     }
-  };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    requestAnimationFrame(animation);
+  };
+  // Optionnel : Une image par défaut si la souris ne survole rien
+
+const SectionMission = () => {
+  // État pour stocker l'image active (par défaut l'image principale)
+  const [activeImage, setActiveImage] = useState(iconeHonneur);
+
+};
+
+
+  return (
+    <section className="relative w-full h-screen bg-cover bg-center flex items-center justify-center" 
+             style={{ backgroundImage: `url(${monImage})` }}>
+      
+      {/* Superposition sombre (Overlay) */}
+      <div className="absolute inset-0 bg-black/50"></div>
+
+      {/* Contenu textuel de la 1ère section */}
+      <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+        <span className="text-cyan-400 font-semibold tracking-wider uppercase text-sm md:text-base">
+          Votre allié du quotidien
+        </span>
+        <h1 className="text-4xl md:text-6xl font-extrabold mt-2 mb-6 leading-tight">
+          L'innovation à portée de main
+        </h1>
+        <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+          Développement sur mesure, solutions web & mobile et services technologiques adaptés à vos ambitions.
+        </p>
+
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <a 
+            href="#contact" 
+            className="group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-xl shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:from-cyan-400 hover:to-cyan-500 transition-all duration-300 transform hover:-translate-y-0.5"
+          >
+            <span>Discutons de votre projet</span>
+            <svg className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+          
+          <a 
+            href="#solutions" 
+            className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl backdrop-blur-md transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg"
+          >
+            Découvrir nos offres
+          </a>
+        </div>
+      </div>
+
+      {/* Bouton flèche haut et flèche bas */}
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center">
+        <div className="group flex flex-col items-center text-gray-300 transition-colors">
+          
+          <a 
+            href="https://shoprth.netlify.app"
+            className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white hover:bg-cyan-500 hover:border-cyan-500 hover:text-white transition-all duration-300 shadow-lg mb-1.5 cursor-pointer"
+            title="Aller vers la boutique RTH"
+          >
+            <svg className="w-4 h-4 transition-transform hover:-translate-y-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7"></path>
+            </svg>
+          </a>
+
+          <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/60 my-1 transition-all"></div>
+          
+          <button 
+            onClick={(e) => scrollToSection(e, 'solutions')}
+            className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white hover:bg-cyan-500 hover:border-cyan-500 hover:text-white transition-all duration-300 animate-bounce shadow-lg mt-1 cursor-pointer"
+            title="Aller à la section Solutions"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </button>
+
+        </div>
+      </div>
+
+    </section>
+  );
+}
+
+// --- Sous-composant WhyRthSection ---
+function WhyRthSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={sectionRef} className="bg-gray-800/30 border border-gray-800 rounded-2xl p-8 mb-16">
+      <div className="text-center mb-10">
+        <h3 className="text-2xl font-bold text-white">Pourquoi travailler avec RTH ?</h3>
+        <p className="text-gray-400 text-sm mt-1">Les avantages concrets d'un partenariat direct et transparent.</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div 
+          className={`text-center md:text-left transform transition-all duration-700 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+          style={{ transitionDelay: '100ms' }}
+        >
+          <div className="w-12 h-12 bg-cyan-500/20 text-cyan-400 rounded-xl flex items-center justify-center mx-auto md:mx-0 mb-4 font-bold text-lg shadow-lg shadow-cyan-500/10">
+            01
+          </div>
+          <h5 className="font-semibold text-white mb-2">Un interlocuteur unique</h5>
+          <p className="text-sm text-gray-300 leading-relaxed">De la conception graphique (UI/UX) jusqu’au déploiement et à la maintenance, tout est géré de A à Z.</p>
+        </div>
+
+        <div 
+          className={`text-center md:text-left transform transition-all duration-700 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+          style={{ transitionDelay: '300ms' }}
+        >
+          <div className="w-12 h-12 bg-cyan-500/20 text-cyan-400 rounded-xl flex items-center justify-center mx-auto md:mx-0 mb-4 font-bold text-lg shadow-lg shadow-cyan-500/10">
+            02
+          </div>
+          <h5 className="font-semibold text-white mb-2">Réactivité & flexibilité</h5>
+          <p className="text-sm text-gray-300 leading-relaxed">Une communication fluide et directe, sans la lourdeur et les intermédiaires des agences traditionnelles.</p>
+        </div>
+
+        <div 
+          className={`text-center md:text-left transform transition-all duration-700 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+          style={{ transitionDelay: '500ms' }}
+        >
+          <div className="w-12 h-12 bg-cyan-500/20 text-cyan-400 rounded-xl flex items-center justify-center mx-auto md:mx-0 mb-4 font-bold text-lg shadow-lg shadow-cyan-500/10">
+            03
+          </div>
+          <h5 className="font-semibold text-white mb-2">Adaptabilité</h5>
+          <p className="text-sm text-gray-300 leading-relaxed">Des solutions sur mesure qui s’adaptent réellement aux besoins et au budget des petites entreprises et startups.</p>
+        </div>
+      </div>
+      <br />
+      {/* --- BANDE D'IMAGE (Immersion & Performance) --- */}
+      <div 
+        className="relative w-full h-[350px] bg-cover bg-center bg-fixed flex items-center justify-center border-y border-gray-800"
+        style={{ backgroundImage: `url(${engagement})` }}
+      >
+        <div className="absolute inset-0 bg-gray-950/75 backdrop-blur-[2px]"></div>
+        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+          <span className="text-cyan-400 text-xs font-semibold tracking-widest uppercase">
+             Où allons-nous ?
+          </span>
+          <h3 className="text-2xl md:text-4xl font-bold text-white mt-2 mb-3">
+           Notre Engagement
+          </h3>
+          <p className="text-gray-300 text-sm md:text-base leading-relaxed text-justify">
+            Chez RTH, nous sommes convaincus que le succès de nos clients est aussi le nôtre. C'est pourquoi nous mettons notre savoir-faire, notre créativité et notre sens du service au cœur de chaque projet afin de construire des solutions durables, innovantes et à forte valeur ajoutée.
+          </p>
+        </div>
+      </div>
+      <div className="relative w-full bg-[#101828] py-28 border-b border-gray-800">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="text-cyan-400 font-semibold tracking-wider uppercase text-sm">
+            Que faisons-nous ? → Mission
+          </span>
+          <h2 className="text-3xl md:text-5xl font-extrabold mt-2 mb-4 leading-tight relative inline-block">
+            <span className="text-cyan-400 text-4xl md:text-6xl absolute -top-4 -left-6 md:-left-8 select-none opacity-80">“</span>
+            Plus qu’une prestation, un engagement fondé sur la relation, le travail et l'honneur.
+            <span className="text-cyan-400 text-4xl md:text-6xl absolute -bottom-6 -right-4 md:-right-6 select-none opacity-80">”</span>
+          </h2>
+          <div className="w-16 h-1 bg-cyan-500 mx-auto mt-6 rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// --- Nouvelle Section : Texte à gauche, Image à droite ---
+export function SolutionsHighlightSection() {
+  return (
+    <section id="solutions" className="bg-gray-900 py-20 border-b border-gray-800">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          {/* Texte à gauche */}
+          <div className="space-y-6">
+            <span className="text-cyan-400 font-semibold tracking-wider uppercase text-sm bg-cyan-500/10 px-3.5 py-1.5 rounded-full border border-cyan-500/20 inline-block">
+             Qui sommes-nous ? 
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight">
+              Notre Histoire
+            </h2>
+           <p className="text-gray-300 text-base leading-relaxed text-justify">
+  RTH — pour Relation, Travail, Honneur — est né d'une ambition commune : réunir des professionnels passionnés au sein d'un pôle multiservice moderne, agile et capable de répondre aux défis du monde numérique et opérationnel d'aujourd'hui.
+  Plus qu'une simple entreprise, RTH est avant tout une équipe soudée, dynamique et complémentaire qui met son expertise collective au service de la réussite de ses clients. Depuis notre création, nous accompagnons les entreprises, les entrepreneurs et les particuliers en proposant des solutions innovantes, fiables et sur mesure. De la création digitale à l'accompagnement stratégique, notre objectif est de transformer chaque défi en une véritable opportunité de croissance durable grâce à la technologie, à la créativité et à une relation de proximité.
+</p>
+          </div>
+
+          {/* Image à droite */}
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div className="relative rounded-3xl overflow-hidden border border-gray-800 shadow-2xl h-[380px]">
+              <img 
+                src={histoire} 
+                alt="Illustration des solutions RTH" 
+                className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-transparent to-transparent flex items-end p-6">
+                <p className="text-sm font-medium text-cyan-300">
+                  ✦ Excellence technique et design centré utilisateur
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+// --- Section 2 : À propos & Valeurs ---
+export function AboutSection() {
+  const [activeImage, setActiveImage] = useState(imgMission1);
+
+  return (
+    <section id="about" className="bg-gray-900 text-white scroll-mt-0">
+      
+      {/* --- BANDE D'IMAGE (Immersion & Performance) : Vision RTH --- */}
+      <div 
+        className="relative w-full h-[350px] bg-cover bg-center bg-fixed flex items-center justify-center border-y border-gray-800"
+        style={{ backgroundImage: `url(${monImage2})` }}
+      >
+        <div className="absolute inset-0 bg-gray-950/75 backdrop-blur-[2px]"></div>
+        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+          <span className="text-cyan-400 text-xs font-semibold tracking-widest uppercase">
+             Où allons-nous ?
+          </span>
+          <h3 className="text-2xl md:text-4xl font-bold text-white mt-2 mb-3">
+            Vision RTH
+          </h3>
+          <p className="text-gray-300 text-sm md:text-base leading-relaxed text-justify">
+            Être une référence en matière de services numériques et de solutions professionnelles à Madagascar et à l'international, en bâtissant des relations durables fondées sur la confiance, l'innovation et l'excellence.
+            Nous aspirons à devenir un partenaire incontournable pour tous ceux qui souhaitent accélérer leur transformation numérique et développer leurs activités avec sérénité.
+          </p>
+        </div>
+      </div>
+
+      {/* --- SECTION MISSION (Interactif avec les puces) --- */}
+      <div className="relative w-full bg-[#101828] py-28 border-b border-gray-800 overflow-hidden">
+        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+          <span className="text-cyan-400 text-xs font-semibold tracking-widest uppercase">
+             Que faisons-nous ?
+          </span>
+          <h3 className="text-2xl md:text-4xl font-bold text-white mt-2 mb-3">
+            MISSION
+          </h3>
+          <p className="text-gray-300 text-sm md:text-base">
+            Pour transformer chaque défi en une opportunité de croissance, nous nous engageons au quotidien à :
+          </p>
+        </div>
+        <div className="my-6"></div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* SECTION INFÉRIEURE : Grille 50% / 50% */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+            
+            {/* PARTIE 1 : L'Image dynamique qui écoute l'état */}
+            <div className="md:col-span-6 min-h-[350px] md:min-h-[450px] rounded-2xl border border-gray-800/60 shadow-xl relative overflow-hidden group">
+              <img 
+                src={activeImage} 
+                alt="Mission RTH" 
+                className="w-full h-full object-cover absolute inset-0 transition-all duration-700 ease-in-out group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gray-950/30 group-hover:bg-gray-950/10 transition-colors duration-500"></div>
+            </div>
+
+            {/* PARTIE 2 : La Liste des puces interactive */}
+            <div className="md:col-span-6 flex flex-col justify-center space-y-4">
+              
+              {/* Point 1 */}
+              <div 
+                onMouseEnter={() => setActiveImage(imgMission1)}
+                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+              >
+                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                  <strong className="text-white font-semibold">Simplifier et optimiser</strong> le quotidien de nos clients grâce à des services d'assistance virtuelle, de community management et de sous-traitance adaptés.
+                </p>
+              </div>
+
+              {/* Point 2 */}
+              <div 
+                onMouseEnter={() => setActiveImage(imgMission2)}
+                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+              >
+                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                  <strong className="text-white font-semibold">Innover et concevoir</strong> des sites web, des applications sur mesure et des solutions numériques performantes répondant aux exigences actuelles.
+                </p>
+              </div>
+
+              {/* Point 3 */}
+              <div 
+                onMouseEnter={() => setActiveImage(imgMission3)}
+                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+              >
+                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                  <strong className="text-white font-semibold">Valoriser l'image</strong> de nos partenaires en créant des identités visuelles percutantes et des supports graphiques professionnels.
+                </p>
+              </div>
+
+              {/* Point 4 */}
+              <div 
+                onMouseEnter={() => setActiveImage(imgMission4)}
+                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+              >
+                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                  <strong className="text-white font-semibold">Transmettre notre savoir-faire</strong> en formant les professionnels, les étudiants et les passionnés aux outils bureautiques et au développement informatique.
+                </p>
+              </div>
+
+              {/* Point 5 */}
+              <div 
+                onMouseEnter={() => setActiveImage(imgMission5)}
+                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+              >
+                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                  <strong className="text-white font-semibold">Équiper et fournir</strong> du matériel informatique fiable et parfaitement adapté aux besoins techniques de chaque projet.
+                </p>
+              </div>
+
+              {/* Point 6 */}
+              <div 
+                onMouseEnter={() => setActiveImage(imgMission6)}
+                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+              >
+                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                  <strong className="text-white font-semibold">Offrir un accompagnement stratégique</strong> de proximité favorisant durablement la productivité, l'efficacité et la réussite de nos clients.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+     {/* --- 3. SECTION HORIZONTALE : LES 3 PILIERS --- */}
+<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12">
+  <div className="text-center mb-12">
+    <div className="inline-block px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold tracking-widest uppercase mb-3 backdrop-blur-sm">
+      Code de conduite
+    </div>
+    <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+      Les Piliers de RTH
+    </h3>
+    <br />
+    <p className="text-gray-300 max-w-2xl mx-auto text-sm md:text-base">
+      RTH : ce triptyque n’est pas qu’un acronyme, c’est notre code de conduite au quotidien avec chaque client.
+          </p>
+  </div>
+
+  {/* Grille horizontale des 3 piliers */}
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="bg-gradient-to-br from-gray-900/90 via-gray-900/50 to-gray-950 border border-gray-800/80 p-6 rounded-2xl shadow-xl hover:border-cyan-500/40 hover:shadow-cyan-500/5 transition-all duration-300 group">
+      <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-xl mb-4 group-hover:bg-cyan-500/20 group-hover:scale-105 transition-all">🤝</div>
+      <h4 className="text-white font-semibold text-lg mb-2 group-hover:text-cyan-300 transition-colors">La Relation</h4>
+      <p className="text-sm text-gray-400 leading-relaxed">Une écoute attentive et un accompagnement sur mesure pour bâtir un partenariat de confiance.</p>
+    </div>
+
+    <div className="bg-gradient-to-br from-gray-900/90 via-gray-900/50 to-gray-950 border border-gray-800/80 p-6 rounded-2xl shadow-xl hover:border-cyan-500/40 hover:shadow-cyan-500/5 transition-all duration-300 group">
+      <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-xl mb-4 group-hover:bg-cyan-500/20 group-hover:scale-105 transition-all">🛠️</div>
+      <h4 className="text-white font-semibold text-lg mb-2 group-hover:text-cyan-300 transition-colors">Le Travail</h4>
+      <p className="text-sm text-gray-400 leading-relaxed">Rigueur, respect des délais, code propre et choix technologiques performants.</p>
+    </div>
+
+    <div className="bg-gradient-to-br from-gray-900/90 via-gray-900/50 to-gray-950 border border-gray-800/80 p-6 rounded-2xl shadow-xl hover:border-cyan-500/40 hover:shadow-cyan-500/5 transition-all duration-300 group">
+      <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-xl mb-4 group-hover:bg-cyan-500/20 group-hover:scale-105 transition-all">🛡️</div>
+      <h4 className="text-white font-semibold text-lg mb-2 group-hover:text-cyan-300 transition-colors">L’Honneur</h4>
+      <p className="text-sm text-gray-400 leading-relaxed">Transparence totale des prix, intégrité dans les conseils et respect des engagements pris.</p>
+    </div>
+  </div>
+</div>
+
+      {/* --- SECTION VALEURS (Les 3 Piliers Détaillés) --- */}
+      <div className="relative w-full mb-20 overflow-hidden shadow-2xl border-y border-cyan-500/20">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{ backgroundImage: `url(${Imagevaleur})` }}
+        ></div>
+        <div className="absolute inset-0 bg-gray-950/85 backdrop-blur-md"></div>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center mb-14">
+            <span className="text-cyan-300 font-semibold tracking-wider uppercase text-sm bg-cyan-500/20 px-4 py-1.5 rounded-full border border-cyan-400/30 shadow-sm">
+              Comment travaillons-nous ?
+            </span>
+            <h3 className="text-2xl md:text-4xl font-bold text-white mt-4">
+              VALEURS
+            </h3>
+            <p className="text-cyan-100/80 text-sm md:text-base mt-2 max-w-xl mx-auto"> 
+              Les valeurs de RTH sont incarnées par les trois piliers fondamentaux qui composent notre identité et guident chacune de nos actions :
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-6">
+            
+            {/* Pilier 1 : Relation */}
+<div className="relative flex flex-col md:flex-row items-stretch group bg-gray-900/50 rounded-2xl border border-gray-800/60 backdrop-blur-sm hover:border-cyan-500/40 transition-all shadow-lg overflow-hidden">
+  {/* Conteneur Image (maintenant relatif pour le positionnement du texte) */}
+  <div className="w-full md:w-2/5 min-h-[250px] md:min-h-full overflow-hidden relative">
+    <img
+      src={iconeRelation}
+      alt="Relation"
+      className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+    />
+    {/* Superposition du dégradé et du texte */}
+    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent p-6 flex flex-col justify-end">
+      <span className="text-xs font-semibold text-cyan-300 uppercase tracking-wider bg-gray-900/60 px-2 py-1 rounded inline-block w-fit">
+        🤝 Relation
+      </span>
+      <h4 className="text-lg md:text-xl font-bold text-white mt-2 mb-1">
+        L'humain au cœur de notre engagement
+      </h4>
+    </div>
+  </div>
+
+  {/* Conteneur Description (partie droite) */}
+  <div className="w-full md:w-3/5 p-6 flex flex-col justify-center">
+    <div className="text-sm md:text-base text-gray-300 leading-relaxed space-y-2">
+      <p>Une collaboration réussie repose avant tout sur la confiance et la proximité.</p>
+      <ul className="list-disc list-inside space-y-1 text-gray-300">
+        <li>Écoute active et proximité avec nos clients.</li>
+        <li>Communication transparente et accompagnement personnalisé.</li>
+        <li>Esprit d'équipe et collaboration unie pour atteindre des objectifs communs.</li>
+        <li>Construction de relations durables et de confiance avec nos partenaires.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{/* Pilier 2 : Travail */}
+<div className="relative flex flex-col md:flex-row items-stretch group bg-gray-900/50 rounded-2xl border border-gray-800/60 backdrop-blur-sm hover:border-cyan-500/40 transition-all shadow-lg overflow-hidden">
+  <div className="w-full md:w-2/5 min-h-[250px] md:min-h-full overflow-hidden relative">
+    <img
+      src={iconeTravail}
+      alt="Travail"
+      className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent p-6 flex flex-col justify-end">
+      <span className="text-xs font-semibold text-cyan-300 uppercase tracking-wider bg-gray-900/60 px-2 py-1 rounded inline-block w-fit">
+        ⚙️ Travail
+      </span>
+      <h4 className="text-lg md:text-xl font-bold text-white mt-2 mb-1">
+        L'excellence comme exigence
+      </h4>
+    </div>
+  </div>
+  <div className="w-full md:w-3/5 p-6 flex flex-col justify-center">
+    <div className="text-sm md:text-base text-gray-300 leading-relaxed space-y-2">
+      <p>Chaque mission est réalisée avec rigueur, engagement et professionnalisme.</p>
+      <ul className="list-disc list-inside space-y-1 text-gray-300">
+        <li>Qualité irréprochable de nos prestations et de nos services.</li>
+        <li>Respect strict des délais et des engagements pris.</li>
+        <li>Recherche permanente d'innovation pour répondre aux évolutions du marché.</li>
+        <li>Polyvalence de notre équipe permettant d'apporter des solutions complètes et adaptées.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{/* Pilier 3 : Honneur */}
+<div className="relative flex flex-col md:flex-row items-stretch group bg-gray-900/50 rounded-2xl border border-gray-800/60 backdrop-blur-sm hover:border-cyan-500/40 transition-all shadow-lg overflow-hidden">
+  <div className="w-full md:w-2/5 min-h-[250px] md:min-h-full overflow-hidden relative">
+    <img
+      src={iconeHonneur}
+      alt="Honneur"
+      className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent p-6 flex flex-col justify-end">
+      <span className="text-xs font-semibold text-cyan-300 uppercase tracking-wider bg-gray-900/60 px-2 py-1 rounded inline-block w-fit">
+        🛡️ Honneur
+      </span>
+      <h4 className="text-lg md:text-xl font-bold text-white mt-2 mb-1">
+        L'intégrité avant tout
+      </h4>
+    </div>
+  </div>
+  <div className="w-full md:w-3/5 p-6 flex flex-col justify-center">
+    <div className="text-sm md:text-base text-gray-300 leading-relaxed space-y-2">
+      <p>Notre réputation et notre force reposent sur des principes éthiques intransigeants.</p>
+      <ul className="list-disc list-inside space-y-1 text-gray-300">
+        <li>Transparence totale dans toutes nos relations professionnelles.</li>
+        <li>Honnêteté et respect rigoureux de nos engagements.</li>
+        <li>Confidentialité absolue des informations et des projets confiés.</li>
+        <li>Responsabilité et implication constante envers la pleine satisfaction de nos clients.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <WhyRthSection />
+      </div>
+    </section>
+  );
+}
+
+// --- Footer complet ---
+export function Footer() {
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setTimeout(() => {
+      setSubmitted(false);
+      e.target.reset();
+    }, 4000);
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#05161a] text-white font-sans p-4 md:p-10 relative overflow-x-hidden">
-      
-      {/* EFFETS DE FOND LUMINEUX */}
-      <div className="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="fixed bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-teal-900/20 rounded-full blur-[120px] pointer-events-none" />
-
-      {/* BOUTON RETOUR */}
-      <motion.button
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        onClick={() => navigate(-1)}
-        className="fixed top-8 left-8 z-50 flex items-center gap-3 px-5 py-2.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full text-cyan-100 hover:bg-cyan-500 hover:text-[#05161a] transition-all group shadow-2xl"
-      >
-        <ChevronLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-        <span className="text-xs font-bold tracking-widest uppercase">Retour</span>
-      </motion.button>
-
-      <div className="max-w-7xl mx-auto relative z-10 pt-16">
+    <footer id="contact" className="w-full bg-gray-950 text-gray-300 pt-20 pb-10 border-t border-gray-800/80 scroll-mt-0">
+      <div className="w-full px-6 sm:px-10 lg:px-16">
         
-        {/* HEADER */}
-        <header className="mb-16">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex items-center justify-center md:justify-start gap-3 text-cyan-400 mb-6"
-          >
-            <Fingerprint size={22} />
-            <span className="text-xs tracking-[0.6em] uppercase font-black">R.TH_Identity</span>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col md:flex-row items-center md:items-center justify-between gap-8"
-          >
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] uppercase italic text-center md:text-left">
-              RELATION <span className="text-[#0c7075]">●</span><br/>
-              TRAVAIL <span className="text-[#0f969c]">●</span><br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-200">HONNEUR</span>
-            </h1>
-
-            <div className="relative group">
-              <img 
-                src={logo} 
-                alt="Logo RTH" 
-                className="h-[120px] md:h-[220px] lg:h-[280px] w-auto object-contain rounded-[2rem] shadow-2xl border border-white/10 group-hover:border-cyan-500/50 transition-all duration-500"
-              />
-              <div className="absolute inset-0 bg-cyan-500/10 blur-3xl -z-10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-            </div>
-          </motion.div>
-        </header>
-
-        {/* BENTO GRID */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-5"
-        >
-          {/* 1. VISION */}
-          <motion.div variants={itemVariants} className="md:col-span-6 lg:col-span-7 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-10 flex flex-col justify-between group hover:border-cyan-500/50 transition-all shadow-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-gray-900">
+          
+          <div className="lg:col-span-5 space-y-6">
             <div>
-              <div className="w-14 h-14 bg-cyan-500/10 rounded-2xl flex items-center justify-center mb-8 border border-cyan-500/20">
-                <Rocket size={28} className="text-cyan-400" />
-              </div>
-              <h2 className="text-3xl font-bold mb-6 text-white uppercase italic">L'élan RTH</h2>
-              <p className="text-cyan-100/60 text-lg leading-relaxed max-w-xl">
-                Nouveau souffle dans l'écosystème digital, <span className="text-cyan-400 font-semibold">RTH</span> est né de la volonté d'offrir des solutions web modernes et accessibles. 
-                Nous fusionnons curiosité technologique et engagement total pour donner vie à vos ambitions numériques.
+              <span className="text-xs font-semibold tracking-wider text-cyan-400 uppercase bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
+                Contactez-nous
+              </span>
+              <h3 className="text-2xl md:text-3xl font-extrabold text-white mt-4 mb-3">
+                Parlons de votre prochain projet
+              </h3>
+              <p className="text-sm text-gray-400 leading-relaxed">
+                Une question, une idée de refonte ou un besoin de développement sur mesure ? Envoyez-nous un message, nous vous répondrons rapidement.
               </p>
             </div>
-            <div className="mt-12 flex items-center gap-4">
-               <div className="px-4 py-1.5 bg-cyan-500/20 rounded-full text-[10px] font-bold text-cyan-300 uppercase tracking-widest border border-cyan-500/30">Nouvelle Génération</div>
-            </div>
-          </motion.div>
 
-          {/* 2. STATS */}
-          <motion.div variants={itemVariants} className="md:col-span-6 lg:col-span-5 bg-[#072e33]/40 backdrop-blur-md border border-cyan-800/30 rounded-[2.5rem] p-10 grid grid-cols-2 gap-8">
-            {[
-              { label: 'Disponibilité', value: '24/7', icon: <Cpu size={16}/> },
-              { label: 'Projets', value: 'Lancement', icon: <Rocket size={16}/> },
-              { label: 'Focus', value: 'Qualité', icon: <Shield size={16}/> },
-              { label: 'Région', value: 'MG', icon: <Globe size={16}/> },
-            ].map((stat, i) => (
-              <div key={i} className="flex flex-col gap-2">
-                <div className="text-cyan-500/50 flex items-center gap-2 uppercase text-[10px] font-black tracking-widest">
-                  {stat.icon} {stat.label}
+            <div className="space-y-4 pt-2">
+              <div className="flex items-center space-x-3 text-sm">
+                <div className="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800/80 flex items-center justify-center text-cyan-400 shrink-0">
+                  📍
                 </div>
-                <div className="text-4xl font-black text-white">{stat.value}</div>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* 3. EXPERTISES */}
-          <motion.div variants={itemVariants} className="md:col-span-6 lg:col-span-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-10 relative overflow-hidden">
-            <h2 className="text-xs font-black tracking-[0.4em] uppercase text-cyan-500/60 mb-10">Pôles_Expertises</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
-              <div className="space-y-4">
-                <ExpertiseItem icon={<Layout size={18}/>} title="Création Web" />
-                <ExpertiseItem icon={<Palette size={18}/>} title="Design Graphique" />
-                <ExpertiseItem icon={<Share2 size={18}/>} title="Social Media" />
-                <ExpertiseItem icon={<Monitor size={18}/>} title="Stratégie Digitale" />
-              </div>
-              <div className="space-y-4">
-                <ExpertiseItem icon={<Headphones size={18}/>} title="Assistance Virtuelle" color="text-teal-400" />
-                <ExpertiseItem icon={<Users size={18}/>} title="Management Pro" color="text-teal-400" />
-                <ExpertiseItem icon={<BookOpen size={18}/>} title="Formations IT" color="text-teal-400" />
-                <ExpertiseItem icon={<Shield size={18}/>} title="Matériel Info" color="text-teal-400" />
-              </div>
-            </div>
-          </motion.div>
-
-          {/* 4. PHILOSOPHIE */}
-          <motion.div variants={itemVariants} whileHover={{ scale: 1.02 }} className="md:col-span-6 lg:col-span-4 bg-[#0f969c] rounded-[2.5rem] p-10 flex flex-col justify-between text-[#05161a] relative overflow-hidden shadow-2xl cursor-default">
-            <Shield size={40} strokeWidth={2.5} />
-            <div className="relative z-10">
-              <h3 className="text-2xl font-black uppercase leading-none mb-3 italic">Évoluons <br/>Ensemble</h3>
-              <p className="text-sm font-bold opacity-80 uppercase leading-tight tracking-tighter">
-                Votre succès est notre priorité. L'équipe s'investit personnellement dans chaque projet pour garantir un résultat unique.
-              </p>
-            </div>
-            <div className="absolute -bottom-10 -right-10 opacity-20 rotate-12 text-[#05161a]">
-                <Fingerprint size={180} />
-            </div>
-          </motion.div>
-
-          {/* 6. SECTION : STACK TECHNOLOGIQUE AVEC ICÔNES DE MARQUES */}
-          <motion.div 
-            variants={itemVariants}
-            className="md:col-span-6 lg:col-span-12 bg-[#072e33]/40 backdrop-blur-md border border-cyan-800/30 rounded-[2.5rem] p-10 flex flex-col hover:border-cyan-500/50 transition-all shadow-xl"
-          >
-            <div className="flex items-center gap-3 text-cyan-400 mb-10">
-                <div className="p-2.5 bg-cyan-500/10 rounded-lg border border-cyan-500/20">
-                    <Code2 size={20} />
+                <div>
+                  <p className="text-gray-400 text-xs">Localisation</p>
+                  <p className="text-white font-medium">Antananarivo, Madagascar</p>
                 </div>
-                <h2 className="text-xs font-black tracking-[0.4em] uppercase text-cyan-500/60">Notre_Stack_Technologique</h2>
+              </div>
+
+              <div className="flex items-center space-x-3 text-sm">
+                <div className="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800/80 flex items-center justify-center text-cyan-400 shrink-0">
+                  ✉️
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs">Email direct</p>
+                  <p className="text-white font-medium">contact@rth-dev.mg</p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-3 text-sm">
+                <div className="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800/80 flex items-center justify-center text-cyan-400 shrink-0">
+                  ⚡
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs">Disponibilité</p>
+                  <p className="text-white font-medium">Du Lundi au Vendredi</p>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <h4 className="text-lg font-bold text-white mb-4">Envoyez un message</h4>
             
-            {/* Grille adaptative pour les icônes */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-6 justify-items-center">
-              {techStack.map((tech, i) => {
-                // Définition du composant d'icône dynamiquement
-                const IconComponent = tech.icon;
-                
-                return (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.1, y: -5 }}
-                    className="flex flex-col items-center gap-4 group"
-                  >
-                    {/* Conteneur de l'icône avec style verre/néon */}
-                    <div className="w-20 h-20 bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center relative transition-all duration-300 group-hover:border-white/20 group-hover:bg-white/10 shadow-xl">
-                      
-                      {/* L'icône elle-même. La couleur change au survol selon la tech */}
-                      <IconComponent 
-                        size={40} 
-                        color="rgba(207, 250, 254, 0.7)" // Couleur par défaut (Cyan très clair)
-                        className="transition-colors duration-300 group-hover:scale-110"
-                        style={{ '--hover-color': tech.color }} // Hack CSS pour passer la couleur au hover
-                      />
-                      
-                      {/* Effet de lueur néon en arrière-plan au survol */}
-                      <div 
-                        className="absolute inset-0 rounded-3xl blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-300 -z-10"
-                        style={{ backgroundColor: tech.color }}
-                      />
-                    </div>
-                    
-                    {/* Nom de la tech en dessous */}
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-cyan-100/50 group-hover:text-cyan-100 transition-colors text-center">
-                      {tech.name}
-                    </span>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
+            {submitted ? (
+              <div className="bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 p-4 rounded-xl text-center text-sm font-medium animate-pulse">
+                ✨ Merci ! Votre message a bien été pris en compte. Nous vous répondrons dans les plus brefs délais.
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-400 mb-1">Votre Nom</label>
+                    <input 
+                      type="text" 
+                      required 
+                      placeholder="Jean Dupont"
+                      className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-400 mb-1">Votre Email</label>
+                    <input 
+                      type="email" 
+                      required 
+                      placeholder="jean@example.com"
+                      className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                    />
+                  </div>
+                </div>
 
-        </motion.div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-400 mb-1">Sujet du projet</label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="Développement d'application web / Refonte UI-UX"
+                    className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                  />
+                </div>
 
-        {/* CALL TO ACTION */}
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mt-24 text-center pb-20">
-          <div className="h-px w-24 bg-cyan-500/30 mx-auto mb-10" />
-          <p className="text-[10px] tracking-[0.8em] text-cyan-500/50 uppercase mb-8">Prendre_le_depart?</p>
-          <motion.button whileHover={{ scale: 1.05, boxShadow: "0px 0px 30px rgba(15, 150, 156, 0.3)" }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/Devis')} className="px-12 py-5 bg-white text-[#05161a] font-black text-xs uppercase tracking-[0.2em] rounded-2xl flex items-center gap-4 mx-auto transition-all shadow-xl">
-            Lancer un projet <ArrowUpRight size={18} />
-          </motion.button>
-        </motion.div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-400 mb-1">Message</label>
+                  <textarea 
+                    rows="4" 
+                    required 
+                    placeholder="Décrivez brièvement vos besoins..."
+                    className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                  ></textarea>
+                </div>
+
+                <button 
+                  type="submit"
+                  className="w-full py-3.5 px-6 text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-xl shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-cyan-500 transition-all duration-300 cursor-pointer"
+                >
+                  Envoyer le message
+                </button>
+              </form>
+            )}
+          </div>
+
+        </div>
+
+        <div className="pt-8 flex items-center justify-center text-xs text-gray-500">
+          <div>
+            <span className="text-white font-semibold">RTH (Relation Travail Honneur)</span> — © {new Date().getFullYear()} Tous droits réservés.
+          </div>
+        </div>
 
       </div>
-      
-      {/* CSS Injecté pour gérer la couleur au hover des icônes SVG */}
-      <style>{`
-        .group:hover svg {
-          color: var(--hover-color) !important;
-        }
-      `}</style>
-    </div>
+    </footer>
   );
-};
+}
 
-const ExpertiseItem = ({ icon, title, color = "text-cyan-400" }) => (
-  <div className="flex items-center gap-4 group cursor-default">
-    <div className={`p-2 bg-white/5 rounded-lg ${color} group-hover:scale-110 transition-transform border border-white/5`}>
-      {icon}
-    </div>
-    <span className="text-sm font-bold uppercase tracking-widest text-cyan-50/80 group-hover:text-white transition-colors">
-      {title}
-    </span>
-  </div>
-);
+// --- Composant principal App ---
+export default function App() {
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
-export default AboutBento;
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroHeight = window.innerHeight;
+      if (window.scrollY > heroHeight * 0.8) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <main className="w-full min-h-screen bg-gray-950 text-white relative">
+      <HeroSection />
+      <SolutionsHighlightSection />
+      <AboutSection />
+      <Footer />
+
+      {showScrollTop && (
+        <button 
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-50 group flex items-center space-x-2 bg-gray-900/90 hover:bg-cyan-500 text-gray-300 hover:text-white px-4 py-3 rounded-2xl border border-gray-800 hover:border-cyan-500 backdrop-blur-md transition-all duration-300 shadow-2xl cursor-pointer"
+          title="Remonter en haut"
+        >
+          <span className="text-xs font-semibold">Haut</span>
+          <svg className="w-4 h-4 transform group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7"></path>
+          </svg>
+        </button>
+      )}
+    </main>
+  );
+}
