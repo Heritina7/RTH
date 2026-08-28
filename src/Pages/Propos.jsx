@@ -2,12 +2,12 @@ import imgMembre1 from '../Assets/images/mission2.png';
 import imgMembre2 from '../Assets/images/mission2.png';
 import imgMembre3 from '../Assets/images/mission2.png';
 // Importez vos images ici (ou utilisez vos variables d'images existantes)
-import imgMission1 from '../Assets/images/mission1.png';
-import imgMission2 from '../Assets/images/mission2.png';
-import imgMission3 from '../Assets/images/mission3.jpg';
-import imgMission4 from '../Assets/images/mission4.jpg';
-import imgMission5 from '../Assets/images/mission5.png';
-import imgMission6 from '../Assets/images/mission6.png';
+import imgMission1 from '../Assets/propos/mission/mission1.webp';
+import imgMission2 from '../Assets/propos/mission/mission2.webp';
+import imgMission3 from '../Assets/propos/mission/mission3.webp';
+import imgMission4 from '../Assets/propos/mission/mission4.webp';
+import imgMission5 from '../Assets/propos/mission/mission5.webp';
+import imgMission6 from '../Assets/propos/mission/mission6.webp';
 
 
 
@@ -19,11 +19,11 @@ import iconeRelation from '../Assets/propos/relation.png';
 import iconeTravail from '../Assets/propos/travail.png';
 import iconeHonneur from '../Assets/propos/honneur.png';
 import { useEffect, useState, useRef } from 'react';
-import monImage from '../Assets/propos/bg.jpg';
-import engagement from '../Assets/propos/engagement.png';
-import Imagevaleur from '../Assets/propos/valeur.jpg';
-import monImage2 from '../Assets/propos/bg1.jpg';
-import histoire from '../Assets/propos/histoire.png';
+import monImage from '../Assets/propos/bg.webp';
+import engagement from '../Assets/propos/engagement.webp';
+import Imagevaleur from '../Assets/propos/valeur.webp';
+import monImage2 from '../Assets/propos/bg1.webp';
+import histoire from '../Assets/propos/histoire.webp';
 
 // --- Section 1 : Hero avec flèche et transition lente ---
 export function HeroSection() {
@@ -286,11 +286,47 @@ export function SolutionsHighlightSection() {
   );
 }
 
-
+const missionImages = [imgMission1, imgMission2, imgMission3, imgMission4, imgMission5, imgMission6];
 // --- Section 2 : À propos & Valeurs ---
 export function AboutSection() {
-  const [activeImage, setActiveImage] = useState(imgMission1);
+// État pour l'image actuellement visible
+  const [activeImage, setActiveImage] = useState(missionImages[0]);
+  // État pour l'image "suivante" pendant la transition
+  const [nextImage, setNextImage] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
+  // État pour gérer la classe de transition CSS
+  const [isFading, setIsFading] = useState(false);
 
+  // Logique de changement d'image avec transition
+  const changeImage = (newImg) => {
+    if (newImg === activeImage) return;
+
+    setNextImage(newImg); // Prépare la nouvelle image en dessous
+    setIsFading(true);    // Déclenche la transition (opacité 1 sur l'image du dessus)
+
+    // Après la durée de la transition CSS (ici 700ms), on finalise le changement
+    setTimeout(() => {
+      setActiveImage(newImg); // Devient l'image principale
+      setNextImage(null);     // Retire l'image temporaire
+      setIsFading(false);     // Réinitialise l'état de transition
+    }, 700); // Correspond à duration-700
+  };
+
+  // Effet pour le changement automatique (identique au précédent, appelant la nouvelle fonction)
+  useEffect(() => {
+    if (isHovered) return;
+
+    const interval = setInterval(() => {
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * missionImages.length);
+      } while (missionImages[randomIndex] === activeImage); // Évite de retomber sur la même
+
+      changeImage(missionImages[randomIndex]);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [isHovered, activeImage]);
   return (
     <section id="about" className="bg-gray-900 text-white scroll-mt-0">
       
@@ -314,109 +350,123 @@ export function AboutSection() {
         </div>
       </div>
 
-      {/* --- SECTION MISSION (Interactif avec les puces) --- */}
-      <div className="relative w-full bg-[#101828] py-28 border-b border-gray-800 overflow-hidden">
-        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-          <span className="text-cyan-400 text-xs font-semibold tracking-widest uppercase">
-             Que faisons-nous ?
-          </span>
-          <h3 className="text-2xl md:text-4xl font-bold text-white mt-2 mb-3">
-            MISSION
-          </h3>
-          <p className="text-gray-300 text-sm md:text-base">
-            Pour transformer chaque défi en une opportunité de croissance, nous nous engageons au quotidien à :
-          </p>
-        </div>
-        <div className="my-6"></div>
+    <div className="relative w-full bg-[#101828] py-28 border-b border-gray-800 overflow-hidden">
+      <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+        <span className="text-cyan-400 text-xs font-semibold tracking-widest uppercase">
+          Que faisons-nous ?
+        </span>
+        <h3 className="text-2xl md:text-4xl font-bold text-white mt-2 mb-3">
+          MISSION
+        </h3>
+        <p className="text-gray-300 text-sm md:text-base">
+          Pour transformer chaque défi en une opportunité de croissance, nous nous engageons au quotidien à :
+        </p>
+      </div>
+      <div className="my-6"></div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* SECTION INFÉRIEURE : Grille 50% / 50% */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+          
+          {/* PARTIE 1 : Conteneur de l'Image avec Transition */}
+          <div className="md:col-span-6 min-h-[350px] md:min-h-[450px] rounded-2xl border border-gray-800/60 shadow-xl relative overflow-hidden group bg-gray-900">
             
-            {/* PARTIE 1 : L'Image dynamique qui écoute l'état */}
-            <div className="md:col-span-6 min-h-[350px] md:min-h-[450px] rounded-2xl border border-gray-800/60 shadow-xl relative overflow-hidden group">
-              <img 
-                src={activeImage} 
-                alt="Mission RTH" 
-                className="w-full h-full object-cover absolute inset-0 transition-all duration-700 ease-in-out group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gray-950/30 group-hover:bg-gray-950/10 transition-colors duration-500"></div>
+            {/* Image inférieure (devient active après le fondu) */}
+            <img 
+              src={activeImage} 
+              alt="Mission RTH fond" 
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            
+            {/* Image supérieure (celle qui fait le fondu) */}
+            <img 
+              src={nextImage} 
+              alt="Mission RTH transition" 
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${isFading ? 'opacity-100' : 'opacity-0'}`}
+            />
+            
+            {/* Effet de survol global sur le conteneur image */}
+            <div className="absolute inset-0 bg-gray-950/30 group-hover:bg-gray-950/10 transition-colors duration-500 z-10"></div>
+          </div>
+
+          {/* PARTIE 2 : La Liste des puces interactive */}
+          <div 
+            className="md:col-span-6 flex flex-col justify-center space-y-4"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            
+            {/* Points de la liste (on appelle changeImage au lieu de setActiveImage directement) */}
+            
+            <div 
+              onMouseEnter={() => changeImage(imgMission1)}
+              className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+            >
+               <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                    <strong className="text-white font-semibold">Simplifier et optimiser</strong> le quotidien de nos clients grâce à des services d'assistance virtuelle, de community management et de sous-traitance adaptés.
+                </p>
             </div>
 
-            {/* PARTIE 2 : La Liste des puces interactive */}
-            <div className="md:col-span-6 flex flex-col justify-center space-y-4">
-              
-              {/* Point 1 */}
-              <div 
-                onMouseEnter={() => setActiveImage(imgMission1)}
-                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
-              >
-                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
-                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                  <strong className="text-white font-semibold">Simplifier et optimiser</strong> le quotidien de nos clients grâce à des services d'assistance virtuelle, de community management et de sous-traitance adaptés.
-                </p>
-              </div>
-
-              {/* Point 2 */}
-              <div 
-                onMouseEnter={() => setActiveImage(imgMission2)}
-                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
-              >
-                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
-                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                  <strong className="text-white font-semibold">Innover et concevoir</strong> des sites web, des applications sur mesure et des solutions numériques performantes répondant aux exigences actuelles.
-                </p>
-              </div>
-
-              {/* Point 3 */}
-              <div 
-                onMouseEnter={() => setActiveImage(imgMission3)}
-                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
-              >
-                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
-                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                  <strong className="text-white font-semibold">Valoriser l'image</strong> de nos partenaires en créant des identités visuelles percutantes et des supports graphiques professionnels.
-                </p>
-              </div>
-
-              {/* Point 4 */}
-              <div 
-                onMouseEnter={() => setActiveImage(imgMission4)}
-                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
-              >
-                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
-                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                  <strong className="text-white font-semibold">Transmettre notre savoir-faire</strong> en formant les professionnels, les étudiants et les passionnés aux outils bureautiques et au développement informatique.
-                </p>
-              </div>
-
-              {/* Point 5 */}
-              <div 
-                onMouseEnter={() => setActiveImage(imgMission5)}
-                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
-              >
-                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
-                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                  <strong className="text-white font-semibold">Équiper et fournir</strong> du matériel informatique fiable et parfaitement adapté aux besoins techniques de chaque projet.
-                </p>
-              </div>
-
-              {/* Point 6 */}
-              <div 
-                onMouseEnter={() => setActiveImage(imgMission6)}
-                className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
-              >
-                <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
-                <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-                  <strong className="text-white font-semibold">Offrir un accompagnement stratégique</strong> de proximité favorisant durablement la productivité, l'efficacité et la réussite de nos clients.
-                </p>
-              </div>
-
+            {/* Point 2 */}
+            <div 
+              onMouseEnter={() => changeImage(imgMission2)}
+              className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+            >
+              <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+              <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                <strong className="text-white font-semibold">Innover et concevoir</strong> des sites web, des applications sur mesure et des solutions numériques performantes répondant aux exigences actuelles.
+              </p>
             </div>
 
+            {/* Point 3 */}
+            <div 
+              onMouseEnter={() => changeImage(imgMission3)}
+              className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+            >
+              <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+              <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                <strong className="text-white font-semibold">Valoriser l'image</strong> de nos partenaires en créant des identités visuelles percutantes et des supports graphiques professionnels.
+              </p>
+            </div>
+
+             {/* Point 4 */}
+             <div 
+              onMouseEnter={() => changeImage(imgMission4)}
+              className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+            >
+              <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+              <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                <strong className="text-white font-semibold">Transmettre notre savoir-faire</strong> en formant les professionnels, les étudiants et les passionnés aux outils bureautiques et au développement informatique.
+              </p>
+            </div>
+
+             {/* Point 5 */}
+             <div 
+              onMouseEnter={() => changeImage(imgMission5)}
+              className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+            >
+              <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+              <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                <strong className="text-white font-semibold">Équiper et fournir</strong> du matériel informatique fiable et parfaitement adapté aux besoins techniques de chaque projet.
+              </p>
+            </div>
+
+             {/* Point 6 */}
+             <div 
+              onMouseEnter={() => changeImage(imgMission6)}
+              className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-800/40 cursor-pointer group"
+            >
+              <span className="flex shrink-0 w-5 h-5 mt-1 items-center justify-center rounded-full bg-cyan-500/15 text-cyan-400 text-xs font-bold group-hover:bg-cyan-500 group-hover:text-gray-950 transition-colors">✓</span>
+              <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                <strong className="text-white font-semibold">Offrir un accompagnement stratégique</strong> de proximité favorisant durablement la productivité, l'efficacité et la réussite de nos clients.
+              </p>
+            </div>
+            
           </div>
         </div>
       </div>
+    </div>
+    
 
      {/* --- 3. SECTION HORIZONTALE : LES 3 PILIERS --- */}
 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12">
@@ -428,7 +478,7 @@ export function AboutSection() {
       Les Piliers de RTH
     </h3>
     <br />
-    <p className="text-gray-300 max-w-2xl mx-auto text-sm md:text-base">
+    <p className="text-gray-300 max-w-none mx-auto text-sm md:text-base">
       RTH : ce triptyque n’est pas qu’un acronyme, c’est notre code de conduite au quotidien avec chaque client.
           </p>
   </div>
@@ -470,7 +520,7 @@ export function AboutSection() {
             <h3 className="text-2xl md:text-4xl font-bold text-white mt-4">
               VALEURS
             </h3>
-            <p className="text-cyan-100/80 text-sm md:text-base mt-2 max-w-xl mx-auto"> 
+            <p className="text-cyan-100/80 text-sm md:text-base mt-2 max-w-none mx-auto"> 
               Les valeurs de RTH sont incarnées par les trois piliers fondamentaux qui composent notre identité et guident chacune de nos actions :
             </p>
           </div>
@@ -610,7 +660,10 @@ export function Footer() {
                 Parlons de votre prochain projet
               </h3>
               <p className="text-sm text-gray-400 leading-relaxed">
-                Une question, une idée de refonte ou un besoin de développement sur mesure ? Envoyez-nous un message, nous vous répondrons rapidement.
+                Une question, une idée de refonte ou un besoin de développement sur mesure ? 
+              </p>
+              <p className="text-sm text-gray-400 leading-relaxed">
+                Envoyez-nous un message, nous vous répondrons rapidement.
               </p>
             </div>
 
@@ -631,7 +684,7 @@ export function Footer() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-xs">Email direct</p>
-                  <p className="text-white font-medium">contact@rth-dev.mg</p>
+                  <p className="text-white font-medium">rthheritina@gmail.com</p>
                 </div>
               </div>
 
