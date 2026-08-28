@@ -72,11 +72,11 @@ const SectionMission = () => {
       <div className="absolute inset-0 bg-black/50"></div>
 
       {/* Contenu textuel de la 1ère section */}
-      <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-        <span className="text-cyan-400 font-semibold tracking-wider uppercase text-sm md:text-base">
+      <div className="relative z-10 text-center text-white px-4 mt-30 max-w-none mx-auto">
+        <span className="text-cyan-400 font-semibold tracking-wider py-4 uppercase text-sm md:text-base">
           Votre allié du quotidien
         </span>
-        <h1 className="text-4xl md:text-6xl font-extrabold mt-2 mb-6 leading-tight">
+        <h1 className="text-4xl md:text-6xl font-extrabold mt-2 mb-6 py-8 leading-tight max-w-none">
           L'innovation à portée de main
         </h1>
         <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
@@ -215,7 +215,7 @@ function WhyRthSection() {
         <div className="absolute inset-0 bg-gray-950/75 backdrop-blur-[2px]"></div>
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
           <span className="text-cyan-400 text-xs font-semibold tracking-widest uppercase">
-             Où allons-nous ?
+             Pourquoi nous faire confiance ?
           </span>
           <h3 className="text-2xl md:text-4xl font-bold text-white mt-2 mb-3">
            Notre Engagement
