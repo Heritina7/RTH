@@ -1,12 +1,98 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import portfolioIcon from "../Assets/icone/portfolio.png";
+import Navbarform from "../Components/Navbarform";
+
+// 1. IMPORTEZ VOS 5 IMAGES POUR CHAQUE PROJET ICI
+// Exemple pour le Portfolio Heritina :
+import im1 from "../Assets/portfolio/portheritina/im1.png";
+import im2 from "../Assets/portfolio/portheritina/im2.png";
+import im3 from "../Assets/portfolio/portheritina/im3.png";
+import im4 from "../Assets/portfolio/portheritina/im4.png";
+import im6 from "../Assets/portfolio/portheritina/im6.png";
+
+// Importez aussi pour les autres projets selon vos besoins...
 import immo from "../Assets/portfolio/immo.png";
 import hoverimmo from "../Assets/portfolio/hoverimmo.png";
-import Navbarform from "../Components/Navbarform";
 import login from "../Assets/portfolio/login.png";
 import dashboard from "../Assets/portfolio/dashboard.png";
 import comb1 from "../Assets/portfolio/KOMB/image.png";
 import comb2 from "../Assets/portfolio/KOMB/image2.png";
+//image espace 
+import esp1 from "../Assets/portfolio/espace/esp1.png";
+import esp2 from "../Assets/portfolio/espace/esp2.png";
+import esp3 from "../Assets/portfolio/espace/esp3.png";
+import esp4 from "../Assets/portfolio/espace/esp4.png";
+import esp5 from "../Assets/portfolio/espace/esp5.png";
+//image apiculture
+import ap1 from "../Assets/portfolio/apiculture/ap1.png";
+import ap2 from "../Assets/portfolio/apiculture/ap2.png";
+import ap3 from "../Assets/portfolio/apiculture/ap3.png";
+import ap4 from "../Assets/portfolio/apiculture/ap4.png";
+import ap5 from "../Assets/portfolio/apiculture/ap5.png";
+
+// Sous-composant pour gérer l'animation séquentielle des 5 images au survol
+function ProductCard({ service }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    let interval = null;
+    if (isHovered && service.images && service.images.length > 0) {
+      interval = setInterval(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % service.images.length);
+      }, 800); // Change d'image toutes les 800ms (vous pouvez ajuster la vitesse ici)
+    } else {
+      setCurrentImageIndex(0);
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isHovered, service.images]);
+
+  return (
+    <a
+      href={service.lien}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group block relative h-[300px] md:h-[340px] rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 border border-gray-100 cursor-pointer"
+    >
+      {/* Étiquette NOUVEAU */}
+      {service.nouveau && (
+        <div className="absolute top-3 right-3 z-30 bg-[#2DD298] text-slate-950 font-black text-[10px] tracking-wider px-2.5 py-1 rounded-full uppercase shadow-md">
+          Nouveau
+        </div>
+      )}
+
+      {/* Affichage de l'image active du diaporama */}
+      <div className="absolute inset-0">
+        <img
+          src={service.images[currentImageIndex] || service.images[0]}
+          alt={service.title}
+          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+        />
+      </div>
+
+      {/* Overlay Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500" />
+
+      {/* Infos */}
+      <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-end">
+        <span className="text-[#2DD298] text-[10px] font-black tracking-[0.2em] mb-1 uppercase">
+          {service.categorie}
+        </span>
+
+        <h3 className="text-white text-lg md:text-xl font-bold mb-2">
+          {service.title}
+        </h3>
+
+        <p className="text-slate-200 text-xs leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+          {service.description}
+        </p>
+      </div>
+    </a>
+  );
+}
 
 export default function Produit() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -21,33 +107,57 @@ export default function Produit() {
     { nom: "GALERIE" },
   ];
 
+  // 2. AJOUTEZ VOS 5 IMAGES DANS LE TABLEAU `images` DE CHAQUE SERVICE
   const services = [
     {
-      title: "Site Vitrine",
-      description: "Site Vitrine d'un éléveur de Kombo",
-      image: comb1,
-      imagehover: comb2,
-      categorie: "APPLICATION WEB",
-      lien: "https://rthcombo.netlify.app", // <-- AJOUT DU LIEN ICI
-    },
-    {
-      title: "App Web",
-      description: "Application Web de gestion pour une établissement scolaire.(id:admin, mdp:admin123)",
-      image: login,
-      imagehover: dashboard,
-      categorie: "APPLICATION WEB",
-      lien: "https://edurth.netlify.app", // <-- AJOUT DU LIEN ICI
-    },
-    {
-      title: "Site Vitrine",
-      description: "Site presentation et catalogue d'une site immobilier.",
-      image: immo,
-      imagehover: hoverimmo,
+      title: "PORTFOLIO Heritina",
+      description: "Site Vitrine ",
+      images: [im1, im2, im3, im4, im6], // Mettez vos 5 variables d'images ici
       categorie: "VITRINE",
-      lien: "https://rthimmo.netlify.app", // <-- AJOUT DU LIEN ICI
+      lien: "https://rheritina.netlify.app",
+      nouveau: true,
+    },
+    {
+      title: "APICULTURE",
+      description: "Site Vitrine ",
+      images: [ap1, ap2, ap3, ap4, ap5], // Mettez vos 5 variables d'images ici
+      categorie: "VITRINE",
+      lien: "https://rthapiculture.netlify.app",
+      nouveau: true,
+    },
+    {
+      title: "Espace AURORA",
+      description: "Site Vitrine d'un espace ",
+      images: [esp1, esp2, esp3, esp4, esp5], // Mettez vos 5 variables d'images ici
+      categorie: "VITRINE",
+      lien: "https://rthcombo.netlify.app",
+      nouveau: true,
+    },
+    {
+      title: "Eleveur Kombo",
+      description: "Site Vitrine d'un éléveur de Kombo",
+      images: [comb1, comb2, comb1, comb2, comb1], // Mettez vos 5 variables d'images ici
+      categorie: "APPLICATION WEB",
+      lien: "https://rthcombo.netlify.app",
+      nouveau: false,
+    },
+    {
+      title: "Application ecole",
+      description: "Application Web de gestion pour une établissement scolaire.(id:admin, mdp:admin123)",
+      images: [login, dashboard, login, dashboard, login], // Mettez vos 5 variables d'images ici
+      categorie: "APPLICATION WEB",
+      lien: "https://edurth.netlify.app",
+      nouveau: false,
+    },
+    {
+      title: "Immobilier",
+      description: "Site presentation et catalogue d'une site immobilier.",
+      images: [immo, hoverimmo, immo, hoverimmo, immo], // Mettez vos 5 variables d'images ici
+      categorie: "VITRINE",
+      lien: "https://rthimmo.netlify.app",
+      nouveau: false,
     },
   ];
-
 
   const filteredServices =
     activeTab === "TOUT"
@@ -72,10 +182,8 @@ export default function Produit() {
 
       {/* CONTENU PRINCIPAL */}
       <main className="w-full py-12 px-4 md:px-[1cm] relative">
-
         {/* BARRE DE FILTRES STICKY */}
         <div className="sticky top-[70px] md:top-[80px] z-40 w-full flex flex-col items-center mb-12 py-4 bg-white/90 backdrop-blur-md">
-          
           {/* Navigation Desktop */}
           <nav className="hidden lg:flex p-1.5 bg-white shadow-sm rounded-full border border-gray-200">
             {NavLinks.map(({ nom }) => (
@@ -136,46 +244,7 @@ export default function Produit() {
         {/* GRILLE DE PRODUITS */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
           {filteredServices.map((service, index) => (
-            /* Modification : Div changée en balise <a> pour rendre toute la carte cliquable */
-            <a
-              key={index}
-              href={service.lien}
-              target="_blank" /* Optionnel : ouvre dans un nouvel onglet */
-              rel="noopener noreferrer" /* Sécurité requise avec target="_blank" */
-              className="group block relative h-[300px] md:h-[340px] rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 border border-gray-100 cursor-pointer"
-            >
-              {/* Images */}
-              <div className="absolute inset-0">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <img
-                  src={service.imagehover}
-                  alt={service.title}
-                  className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                />
-              </div>
-
-              {/* Overlay Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500" />
-
-              {/* Infos */}
-              <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-end">
-                <span className="text-[#2DD298] text-[10px] font-black tracking-[0.2em] mb-1 uppercase">
-                  {service.categorie}
-                </span>
-
-                <h3 className="text-white text-lg md:text-xl font-bold mb-2">
-                  {service.title}
-                </h3>
-
-                <p className="text-slate-200 text-xs leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-                  {service.description}
-                </p>
-              </div>
-            </a>
+            <ProductCard key={index} service={service} />
           ))}
         </div>
 
@@ -185,7 +254,6 @@ export default function Produit() {
             <p className="text-slate-400 font-medium">Aucun service disponible dans cette catégorie.</p>
           </div>
         )}
-
       </main>
     </div>
   );
