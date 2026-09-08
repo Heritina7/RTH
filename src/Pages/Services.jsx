@@ -15,7 +15,6 @@ const Check = () => (
   </svg>
 );
 
-// Fusion des cartes Réseaux et VDI en une seule section d'infrastructure globale
 const combinedNetworkCards = [
   {
     title: "Audit & Conseil",
@@ -108,14 +107,26 @@ const services = [
   { title: "Maintenance",          img: mainte,desc: "Sécurité & mises à jour" },
 ];
 
-/* ── Composant principal ─────────────────────────────────────── */
 export default function Services() {
+  const webScrollRef = useRef(null);
+  const vdiScrollRef = useRef(null);
+
+  const scrollCarousel = (ref, direction) => {
+    if (ref.current) {
+      const { scrollLeft, clientWidth } = ref.current;
+      const scrollAmount = clientWidth > 768 ? clientWidth / 3 : clientWidth;
+      ref.current.scrollTo({
+        left: direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <div
       className="text-white min-h-screen w-full font-sans overflow-x-hidden"
       style={{ background: '#080c14' }}
     >
-      {/* ── FOND AMBIANT ── */}
       <div
         aria-hidden
         style={{
@@ -126,7 +137,6 @@ export default function Services() {
         }}
       />
 
-      {/* ── GRILLE DE FOND SUBTILE ── */}
       <div
         aria-hidden
         style={{
@@ -139,14 +149,10 @@ export default function Services() {
       />
 
       <div className="relative z-10 px-5 sm:px-10 md:px-16 lg:px-24 max-w-[1440px] mx-auto pb-32">
-
         <Navbar />
 
-        {/* ════════════════════════════════════════
-            HERO
-        ════════════════════════════════════════ */}
+        {/* HERO */}
         <header className="pt-28 md:pt-36 pb-20 text-center">
-          {/* Eyebrow pill */}
           <span
             className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[.35em] uppercase mb-6"
             style={{
@@ -183,7 +189,6 @@ export default function Services() {
             De la conception graphique au développement web, jusqu'à l'architecture de vos infrastructures réseau — des solutions numériques performantes et sécurisées.
           </p>
 
-          {/* ── Services digitaux ── */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-16">
             {services.map((s, i) => (
               <div
@@ -215,13 +220,9 @@ export default function Services() {
           </div>
         </header>
 
-        {/* ════════════════════════════════════════
-            INFRASTRUCTURES, RÉSEAUX & VDI (FUSIONNÉ)
-        ════════════════════════════════════════ */}
+        {/* INFRASTRUCTURES */}
         <section className="mt-12 mb-32">
           <SectionLabel color="#22d3ee" label="Infrastructures, Réseaux & Câblage VDI" />
-
-          {/* Passage sur un grid adaptatif pour 8 éléments */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
             {combinedNetworkCards.map((card, i) => (
               <NetworkCard key={i} card={card} accent="#22d3ee" accentBg="rgba(6,182,212,.07)" accentHover="rgba(6,182,212,.18)" />
@@ -229,169 +230,303 @@ export default function Services() {
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            FORFAITS WEB
-        ════════════════════════════════════════ */}
+        {/* FORFAITS WEB (CAROUSEL) */}
         <section className="mb-32">
-          <div className="text-center mb-14">
-            <span className="text-[11px] font-bold tracking-[.35em] uppercase text-gray-500 mb-3 block">Tarification</span>
-            <h2
-              className="text-4xl md:text-5xl font-black"
-              style={{
-                background: 'linear-gradient(160deg,#fff 40%,rgba(255,255,255,.35))',
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Forfaits de Developpement
-            </h2>
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10 gap-4">
+            <div>
+              <span className="text-[11px] font-bold tracking-[.35em] uppercase text-gray-500 mb-3 block">Tarification</span>
+              <h2
+                className="text-4xl md:text-5xl font-black"
+                style={{
+                  background: 'linear-gradient(160deg,#fff 40%,rgba(255,255,255,.35))',
+                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Forfaits de Developpement
+              </h2>
+            </div>
+            
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => scrollCarousel(webScrollRef, 'left')}
+                className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-cyan-500/20 hover:border-cyan-500/40 text-white transition-all"
+                aria-label="Précédent"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => scrollCarousel(webScrollRef, 'right')}
+                className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-cyan-500/20 hover:border-cyan-500/40 text-white transition-all"
+                aria-label="Suivant"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-            {/* Site Vitrine */}
-            <PricingCard
-              title="Site Vitrine"
-              price="100€ / 500 000 MGA"
-              note="min"
-              badge={null}
-              highlighted={false}
-              items={[
-                "Présentation Business / Entreprise",
-                "CV ou Portfolio en ligne",
-                "4 à 5 pages sur mesure",
-                "Mail Pro personnalisé",
-              ]}
-              addon="+ 20€ (100 000 MGA) – Retouche photos"
-              footnote="Ex: Intranet, Site Corporate..."
-            />
+          {/* Container du carrousel avec espacement (gap-6) pris en compte */}
+          <div 
+            ref={webScrollRef}
+            className="flex gap-6 overflow-x-auto pb-6 pt-4 snap-x snap-mandatory scrollbar-none"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+              <PricingCard
+                title="Site Vitrine"
+                price="100€ / 500 000 MGA"
+                note="min"
+                badge={null}
+                highlighted={false}
+                items={[
+                  "Présentation Business / Entreprise",
+                  "CV ou Portfolio en ligne",
+                  "4 à 5 pages sur mesure",
+                  "Mail Pro personnalisé",
+                ]}
+                addon="+ 20€ (100 000 MGA) – Retouche photos"
+                footnote="Ex: Intranet, Site Corporate..."
+              />
+            </div>
 
-            {/* Site Catalogue — featured */}
-            <PricingCard
-              title="Site Catalogue"
-              price="160€ / 800 000 MGA"
-              note="tout inclus"
-              badge="Recommandé"
-              highlighted
-              items={[
-                "Tout le pack Vitrine",
-                "Présentation de vos produits",
-                "Espace Admin de gestion",
-                "Panier virtuel de commande",
-                "10 à 15 pages",
-              ]}
-              addon="+ 40€ (200 000 MGA) – Retouche photos"
-              footnote="Ex: Catalogue de Vente, Showroom..."
-            />
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+              <PricingCard
+                title="Site Catalogue"
+                price="160€ / 800 000 MGA"
+                note="tout inclus"
+                badge="Recommandé"
+                highlighted
+                items={[
+                  "Tout le pack Vitrine",
+                  "Présentation de vos produits",
+                  "Espace Admin de gestion",
+                  "Panier virtuel de commande",
+                  "10 à 15 pages",
+                ]}
+                addon="+ 40€ (200 000 MGA) – Retouche photos"
+                footnote="Ex: Catalogue de Vente, Showroom..."
+              />
+            </div>
 
-            {/* Web App */}
-            <PricingCard
-              title="OFFRE B2B & PARTENAIRE"
-              price="Sur Devis"
-              note="MODERNISATION 100%"
-              badge={null}
-              highlighted={false}
-              priceColor="#c084fc"
-              items={[
-                "Fonctionnalités métier avancées",
-                "Migration de stack & optimisation des performances",
-                "Refonte technique & graphique sur mesure",
-                "Intégration de votre propre branding",
-                "Confidentialité absolue garantie",
-              ]}
-              addon=""
-              footnote="EX: REFONTE, MODERNISATION, ERP..."
-            />
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+              <PricingCard
+                title="E-Commerce Avancé"
+                price="350€ / 1 750 000 MGA"
+                note="Boutique en ligne complète"
+                badge={null}
+                highlighted={false}
+                items={[
+                  "Gestion illimitée de produits & stocks",
+                  "Passerelle de paiement sécurisée",
+                  "Module de livraison & frais dynamiques",
+                  "Espace client avec historique commandes",
+                  "Optimisation SEO e-commerce avancée",
+                ]}
+                addon="+ 60€ (300 000 MGA) – Multi-devises"
+                footnote="Ex: Boutique, Marketplace..."
+              />
+            </div>
+
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+              <PricingCard
+                title="Application Sur Mesure"
+                price="Sur Devis"
+                note="Web App & SaaS"
+                badge={null}
+                highlighted={false}
+                priceColor="#38bdf8"
+                items={[
+                  "Architecture SaaS ou PWA dédiée",
+                  "API REST / GraphQL & Base de données",
+                  "Tableaux de bord & analytics interactifs",
+                  "Authentification & rôles utilisateurs avancés",
+                  "Maintenance & support technique prioritaire",
+                ]}
+                addon=""
+                footnote="Ex: SaaS, ERP, Plateforme web..."
+              />
+            </div>
+
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+              <PricingCard
+                title="OFFRE B2B & PARTENAIRE"
+                price="Sur Devis"
+                note="MODERNISATION 100%"
+                badge={null}
+                highlighted={false}
+                priceColor="#c084fc"
+                items={[
+                  "Fonctionnalités métier avancées",
+                  "Migration de stack & optimisation des performances",
+                  "Refonte technique & graphique sur mesure",
+                  "Intégration de votre propre branding",
+                  "Confidentialité absolue garantie",
+                ]}
+                addon=""
+                footnote="EX: REFONTE, MODERNISATION, ERP..."
+              />
+            </div>
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            FORFAITS VDI
-        ════════════════════════════════════════ */}
+        {/* FORFAITS VDI (CAROUSEL) */}
         <section className="mb-32">
-          <div className="text-center mb-14">
-            <span className="text-[11px] font-bold tracking-[.35em] uppercase text-gray-500 mb-3 block">Câblage Structuré</span>
-            <h2
-              className="text-4xl md:text-5xl font-black"
-              style={{
-                background: 'linear-gradient(160deg,#fff 40%,rgba(255,255,255,.35))',
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Forfaits Installation VDI
-            </h2>
-            <p className="text-sm text-gray-500 mt-4 max-w-xl mx-auto">
-              Du petit bureau au site industriel — pose propre, certification incluse, baies livrées clé en main.
-            </p>
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10 gap-4">
+            <div>
+              <span className="text-[11px] font-bold tracking-[.35em] uppercase text-gray-500 mb-3 block">Câblage Structuré</span>
+              <h2
+                className="text-4xl md:text-5xl font-black"
+                style={{
+                  background: 'linear-gradient(160deg,#fff 40%,rgba(255,255,255,.35))',
+                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Forfaits Installation VDI
+              </h2>
+              <p className="text-sm text-gray-500 mt-2 max-w-xl">
+                Du petit bureau au site industriel — pose propre, certification incluse, baies livrées clé en main.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => scrollCarousel(vdiScrollRef, 'left')}
+                className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-purple-500/20 hover:border-purple-500/40 text-white transition-all"
+                aria-label="Précédent"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => scrollCarousel(vdiScrollRef, 'right')}
+                className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-purple-500/20 hover:border-purple-500/40 text-white transition-all"
+                aria-label="Suivant"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-            {/* Pack Starter */}
-            <PricingCard
-              title="Pack Starter"
-              price="Sur Devis"
-              note="Jusqu'à 12 prises RJ45"
-              badge={null}
-              highlighted={false}
-              accentColor="#a78bfa"
-              items={[
-                "Étude & relevé de plan préalable",
-                "Pose des chemins de câbles",
-                "Tirage & raccordement Cat6 / Cat6a",
-                "Installation d'un bandeau de brassage 1U",
-                "Test de continuité de chaque liaison",
-                "Repérage & étiquetage complet",
-              ]}
-              addon=""
-              footnote="Ex: Bureau, Commerce, Agence..."
-            />
+          <div 
+            ref={vdiScrollRef}
+            className="flex gap-6 overflow-x-auto pb-6 pt-4 snap-x snap-mandatory scrollbar-none"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+              <PricingCard
+                title="Pack Starter"
+                price="Sur Devis"
+                note="Jusqu'à 12 prises RJ45"
+                badge={null}
+                highlighted={false}
+                accentColor="#a78bfa"
+                items={[
+                  "Étude & relevé de plan préalable",
+                  "Pose des chemins de câbles",
+                  "Tirage & raccordement Cat6 / Cat6a",
+                  "Installation d'un bandeau de brassage 1U",
+                  "Test de continuité de chaque liaison",
+                  "Repérage & étiquetage complet",
+                ]}
+                addon=""
+                footnote="Ex: Bureau, Commerce, Agence..."
+              />
+            </div>
 
-            {/* Pack Pro — featured */}
-            <PricingCard
-              title="Pack Professionnel"
-              price="Sur Devis"
-              note="De 12 à 48 prises RJ45"
-              badge="Recommandé"
-              highlighted
-              highlightColor="purple"
-              accentColor="#a78bfa"
-              items={[
-                "Tout le Pack Starter",
-                "Câblage Cat6a ou Cat7 haute performance",
-                "Baie de brassage 6U à 12U complète",
-                "Certification réflectomètre (rapport inclus)",
-                "Schéma d'architecture annoté livré",
-                "Intégration switch & patch cords",
-                "Garantie 1 an sur les liaisons",
-              ]}
-              addon="+ Formation responsable technique"
-              footnote="Ex: PME, Hôtel, Clinique, École..."
-            />
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+              <PricingCard
+                title="Pack Professionnel"
+                price="Sur Devis"
+                note="De 12 à 48 prises RJ45"
+                badge="Recommandé"
+                highlighted
+                highlightColor="purple"
+                accentColor="#a78bfa"
+                items={[
+                  "Tout le Pack Starter",
+                  "Câblage Cat6a ou Cat7 haute performance",
+                  "Baie de brassage 6U à 12U complète",
+                  "Certification réflectomètre (rapport inclus)",
+                  "Schéma d'architecture annoté livré",
+                  "Intégration switch & patch cords",
+                  "Garantie 1 an sur les liaisons",
+                ]}
+                addon="+ Formation responsable technique"
+                footnote="Ex: PME, Hôtel, Clinique, École..."
+              />
+            </div>
 
-            {/* Pack Industriel */}
-            <PricingCard
-              title="Pack Industriel"
-              price="Sur Devis"
-              note="48+ prises / multi-locaux"
-              badge={null}
-              highlighted={false}
-              accentColor="#a78bfa"
-              items={[
-                "Audit complet & plan d'exécution",
-                "Câblage fibres optiques (OM3/OM4)",
-                "Armoires 19″ multi-baies",
-                "Certification Cat7 / Classe FA",
-                "Reprise & clean-up de l'existant",
-                "Documentation technique complète",
-                "Maintenance & SAV inclus 1 an",
-              ]}
-              addon=""
-              footnote="Ex: Site industriel, Dataroom, Campus..."
-            />
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+              <PricingCard
+                title="Pack Fibre Optique"
+                price="Sur Devis"
+                note="Interconnexion Inter-bâtiments"
+                badge={null}
+                highlighted={false}
+                accentColor="#a78bfa"
+                items={[
+                  "Tirage de câble fibre optique (Monomode / Multimode)",
+                  "Pose de boîtiers de raccordement optique (BTO)",
+                  "Soudure par fusion et jarretières adaptées",
+                  "Tests de réflectométrie optique (OTDR)",
+                  "Rapport de certification d'affaiblissement",
+                ]}
+                addon="+ Modules SFP inclus"
+                footnote="Ex: Campus, Entrepôts, Immeubles..."
+              />
+            </div>
+
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+              <PricingCard
+                title="Pack Wi-Fi Pro & Mesh"
+                price="Sur Devis"
+                note="Couverture Sans Fil Totale"
+                badge={null}
+                highlighted={false}
+                accentColor="#a78bfa"
+                items={[
+                  "Étude de couverture thermique des locaux",
+                  "Installation de bornes Wi-Fi professionnelles",
+                  "Création de VLANs séparés (Invités / Interne)",
+                  "Portail captif personnalisable optionnel",
+                  "Optimisation de la haute densité et roaming",
+                ]}
+                addon=""
+                footnote="Ex: Restaurants, Hôtels, Open-spaces..."
+              />
+            </div>
+
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+              <PricingCard
+                title="Pack Industriel"
+                price="Sur Devis"
+                note="48+ prises / multi-locaux"
+                badge={null}
+                highlighted={false}
+                accentColor="#a78bfa"
+                items={[
+                  "Audit complet & plan d'exécution",
+                  "Câblage fibres optiques (OM3/OM4)",
+                  "Armoires 19″ multi-baies",
+                  "Certification Cat7 / Classe FA",
+                  "Reprise & clean-up de l'existant",
+                  "Documentation technique complète",
+                  "Maintenance & SAV inclus 1 an",
+                ]}
+                addon=""
+                footnote="Ex: Site industriel, Dataroom, Campus..."
+              />
+            </div>
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            POURQUOI NOUS
-        ════════════════════════════════════════ */}
+        {/* POURQUOI NOUS */}
         <section className="mb-32">
           <div
             className="rounded-[2.5rem] p-8 md:p-14"
@@ -430,9 +565,7 @@ export default function Services() {
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            PORTFOLIO
-        ════════════════════════════════════════ */}
+        {/* PORTFOLIO */}
         <section>
           <div className="flex items-end justify-between mb-10">
             <div>
@@ -481,8 +614,6 @@ export default function Services() {
     </div>
   );
 }
-
-/* ── Sub-components ──────────────────────────────────────────── */
 
 function SectionLabel({ color, label }) {
   return (
@@ -589,6 +720,7 @@ function PricingCard({ title, price, note, badge, highlighted, highlightColor, p
     background: highlightBg,
     border: highlightBorder,
     boxShadow: highlighted ? highlightShadow : 'none',
+    height: '100%',
   };
 
   return (
@@ -630,7 +762,7 @@ function PricingCard({ title, price, note, badge, highlighted, highlightColor, p
         {note && <div className="text-[10px] text-gray-500 mt-1 uppercase tracking-widest">{note}</div>}
       </div>
 
-      <ul className="flex flex-col gap-2.5">
+      <ul className="flex flex-col gap-2.5 flex-grow">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
             <svg style={{ width:16, height:16, color: checkClr, flexShrink:0, marginTop:2 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
