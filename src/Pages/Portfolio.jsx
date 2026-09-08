@@ -40,7 +40,7 @@ function ProductCard({ service }) {
     if (isHovered && service.images && service.images.length > 0) {
       interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % service.images.length);
-      }, 800); // Change d'image toutes les 800ms (vous pouvez ajuster la vitesse ici)
+      }, 800); // Change d'image toutes les 800ms
     } else {
       setCurrentImageIndex(0);
       clearInterval(interval);
@@ -55,7 +55,8 @@ function ProductCard({ service }) {
       rel="noopener noreferrer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group block relative h-[300px] md:h-[340px] rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 border border-gray-100 cursor-pointer"
+      // MODIFICATION ICI : Hauteur réduite pour un format rectangle (paysage / écran PC)
+      className="group block relative h-[210px] sm:h-[230px] md:h-[250px] rounded-2xl overflow-hidden bg-slate-900 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 border border-gray-100 cursor-pointer"
     >
       {/* Étiquette NOUVEAU */}
       {service.nouveau && (
@@ -65,11 +66,12 @@ function ProductCard({ service }) {
       )}
 
       {/* Affichage de l'image active du diaporama */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
         <img
           src={service.images[currentImageIndex] || service.images[0]}
           alt={service.title}
-          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+          // MODIFICATION ICI : object-contain permet de voir toute l'image du site sans la rogner sur les côtés
+          className="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105"
         />
       </div>
 
@@ -77,12 +79,12 @@ function ProductCard({ service }) {
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500" />
 
       {/* Infos */}
-      <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-end">
+      <div className="absolute inset-0 p-4 md:p-5 flex flex-col justify-end">
         <span className="text-[#2DD298] text-[10px] font-black tracking-[0.2em] mb-1 uppercase">
           {service.categorie}
         </span>
 
-        <h3 className="text-white text-lg md:text-xl font-bold mb-2">
+        <h3 className="text-white text-base md:text-lg font-bold mb-1">
           {service.title}
         </h3>
 
@@ -107,12 +109,11 @@ export default function Produit() {
     { nom: "GALERIE" },
   ];
 
-  // 2. AJOUTEZ VOS 5 IMAGES DANS LE TABLEAU `images` DE CHAQUE SERVICE
   const services = [
     {
       title: "PORTFOLIO Heritina",
       description: "Site Vitrine ",
-      images: [im1, im2, im3, im4, im6], // Mettez vos 5 variables d'images ici
+      images: [im1, im2, im3, im4, im6],
       categorie: "VITRINE",
       lien: "https://rheritina.netlify.app",
       nouveau: true,
@@ -120,7 +121,7 @@ export default function Produit() {
     {
       title: "APICULTURE",
       description: "Site Vitrine ",
-      images: [ap1, ap2, ap3, ap4, ap5], // Mettez vos 5 variables d'images ici
+      images: [ap1, ap2, ap3, ap4, ap5],
       categorie: "VITRINE",
       lien: "https://rthapiculture.netlify.app",
       nouveau: true,
@@ -128,7 +129,7 @@ export default function Produit() {
     {
       title: "Espace AURORA",
       description: "Site Vitrine d'un espace ",
-      images: [esp1, esp2, esp3, esp4, esp5], // Mettez vos 5 variables d'images ici
+      images: [esp1, esp2, esp3, esp4, esp5],
       categorie: "VITRINE",
       lien: "https://rthcombo.netlify.app",
       nouveau: true,
@@ -136,7 +137,7 @@ export default function Produit() {
     {
       title: "Eleveur Kombo",
       description: "Site Vitrine d'un éléveur de Kombo",
-      images: [comb1, comb2, comb1, comb2, comb1], // Mettez vos 5 variables d'images ici
+      images: [comb1, comb2, comb1, comb2, comb1],
       categorie: "APPLICATION WEB",
       lien: "https://rthcombo.netlify.app",
       nouveau: false,
@@ -144,7 +145,7 @@ export default function Produit() {
     {
       title: "Application ecole",
       description: "Application Web de gestion pour une établissement scolaire.(id:admin, mdp:admin123)",
-      images: [login, dashboard, login, dashboard, login], // Mettez vos 5 variables d'images ici
+      images: [login, dashboard, login, dashboard, login],
       categorie: "APPLICATION WEB",
       lien: "https://edurth.netlify.app",
       nouveau: false,
@@ -152,7 +153,7 @@ export default function Produit() {
     {
       title: "Immobilier",
       description: "Site presentation et catalogue d'une site immobilier.",
-      images: [immo, hoverimmo, immo, hoverimmo, immo], // Mettez vos 5 variables d'images ici
+      images: [immo, hoverimmo, immo, hoverimmo, immo],
       categorie: "VITRINE",
       lien: "https://rthimmo.netlify.app",
       nouveau: false,
@@ -241,9 +242,9 @@ export default function Produit() {
           </div>
         </div>
 
-        {/* GRILLE DE PRODUITS */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-          {filteredServices.map((service, index) => (
+        {/* GRILLE DE PRODUITS (Ajustée pour un affichage optimal des cartes rectangulaires) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredServices.io ? filteredServices.map : filteredServices.map((service, index) => (
             <ProductCard key={index} service={service} />
           ))}
         </div>
