@@ -85,7 +85,7 @@ function ProductCard({ service, onOpen }) {
   );
 }
 
-// ==================== COMPOSANT MODAL ====================
+// ==================== COMPOSANT MODAL (PLEIN ÉCRAN) ====================
 function ProjectModal({ service, onClose }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -107,19 +107,28 @@ function ProjectModal({ service, onClose }) {
     return () => window.removeEventListener("keydown", handleEscape);
   }, [onClose]);
 
+  // Empêcher le scroll de la page quand la modal est ouverte
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   if (!service) return null;
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center"
       onClick={onClose}
     >
+      {/* Conteneur principal de la modal - PLEIN ÉCRAN */}
       <div
-        className="relative w-full max-w-5xl max-h-[92vh] bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+        className="relative w-full h-full max-w-[100vw] max-h-[100vh] bg-white flex flex-col overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-slate-50">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-slate-50 shrink-0">
           <div className="flex items-center gap-3">
             <span className="text-[#2DD298] text-xs font-black tracking-[0.15em] uppercase">
               {service.categorie}
@@ -132,45 +141,47 @@ function ProjectModal({ service, onClose }) {
           </div>
           <button
             onClick={onClose}
-            className="w-9 h-9 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-700 flex items-center justify-center transition-colors text-lg"
+            className="w-10 h-10 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-700 flex items-center justify-center transition-colors text-lg font-bold"
           >
             ✕
           </button>
         </div>
 
-        {/* Corps */}
-        <div className="flex flex-col md:flex-row overflow-y-auto">
-          {/* Colonne Image */}
-          <div className="w-full md:w-[45%] relative bg-slate-900 min-h-[280px] md:min-h-[500px] flex items-center justify-center">
+        {/* Corps - prend tout l'espace restant */}
+        <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
+          
+          {/* Colonne Image - fixe en taille */}
+          <div className="w-full md:w-[50%] bg-slate-900 flex items-center justify-center relative overflow-hidden">
             <img
               src={service.images[currentImageIndex]}
               alt={service.title}
-              className="max-w-full max-h-full object-contain"
+              className="max-w-full max-h-full object-contain p-4"
             />
 
-            <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-2 z-10">
+            {/* Pastilles de navigation */}
+            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
               {service.images.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentImageIndex(idx)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all ${
+                  className={`w-3 h-3 rounded-full transition-all ${
                     idx === currentImageIndex
                       ? "bg-[#2DD298] scale-125"
-                      : "bg-white/60 hover:bg-white"
+                      : "bg-white/50 hover:bg-white"
                   }`}
                 />
               ))}
             </div>
           </div>
 
-          {/* Colonne Contenu */}
-          <div className="w-full md:w-[55%] p-6 md:p-8 overflow-y-auto">
+          {/* Colonne Contenu - scrollable si besoin */}
+          <div className="w-full md:w-[50%] p-6 md:p-10 overflow-y-auto bg-white">
             <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-2">
               {service.title}
             </h2>
 
             {service.annee && (
-              <p className="text-slate-400 text-sm mb-5">{service.annee}</p>
+              <p className="text-slate-400 text-sm mb-6">{service.annee}</p>
             )}
 
             <div className="mb-6">
@@ -247,7 +258,6 @@ function ProjectModal({ service, onClose }) {
     </div>
   );
 }
-
 // ==================== COMPOSANT PRINCIPAL ====================
 export default function Produit() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
