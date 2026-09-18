@@ -274,6 +274,7 @@ export default function Services() {
             className="flex gap-6 overflow-x-auto pb-6 pt-4 snap-x snap-mandatory scrollbar-none"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
+            
             <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
               <PricingCard
                 title="Site Vitrine"
@@ -294,20 +295,41 @@ export default function Services() {
 
             <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
               <PricingCard
-                title="Site Catalogue"
-                price="160€ / 800 000 MGA"
-                note="tout inclus"
-                badge="Recommandé"
+                title="OFFRE B2B & PARTENAIRE"
+                price="Sur Devis"
+                note="Votre bras armé technique"
+                badge="sous-traitance"
+                priceColor="#38bdf8"
                 highlighted
                 items={[
-                  "Tout le pack Vitrine",
-                  "Présentation de vos produits",
-                  "Espace Admin de gestion",
-                  "Panier virtuel de commande",
-                  "10 à 15 pages",
+                  "Développement sur mesure (Web & Mobile)",
+                  "Intégration de votre propre branding",   
+                  "Respect strict des délais & des specs",
+                  "Code propre, scalable & documenté", 
+                  "Confidentialité absolue garantie",
                 ]}
-                addon="+ 40€ (200 000 MGA) – Retouche photos"
-                footnote="Ex: Catalogue de Vente, Showroom..."
+                addon=""
+                footnote="EX: REFONTE, MODERNISATION, ERP..."
+              />
+            </div>
+
+            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
+              <PricingCard
+                title="Site Catalogue"
+                price="160€ / 800 000 MGA"
+                note="min"
+                badge={null}
+                highlighted={false}
+                items={[
+                   "Tout le pack Vitrine", 
+                   "Présentation de vos produits",   
+                   "Espace Admin de gestion",   
+                   "Panier virtuel de commande",   
+                   "10 à 15 pages", 
+                  "Mail Pro personnalisé",
+                ]}
+                 addon="+ 40 € (200 000 MGA) – RETOUCHE PHOTOS"
+                footnote="EX: CATALOGUE DE VENTE, SHOWROOM..."
               />
             </div>
 
@@ -337,7 +359,7 @@ export default function Services() {
                 note="Web App & SaaS"
                 badge={null}
                 highlighted={false}
-                priceColor="#38bdf8"
+                priceColor="#c084fc"
                 items={[
                   "Architecture SaaS ou PWA dédiée",
                   "API REST / GraphQL & Base de données",
@@ -350,25 +372,6 @@ export default function Services() {
               />
             </div>
 
-            <div className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 snap-start">
-              <PricingCard
-                title="OFFRE B2B & PARTENAIRE"
-                price="Sur Devis"
-                note="MODERNISATION 100%"
-                badge={null}
-                highlighted={false}
-                priceColor="#c084fc"
-                items={[
-                  "Fonctionnalités métier avancées",
-                  "Migration de stack & optimisation des performances",
-                  "Refonte technique & graphique sur mesure",
-                  "Intégration de votre propre branding",
-                  "Confidentialité absolue garantie",
-                ]}
-                addon=""
-                footnote="EX: REFONTE, MODERNISATION, ERP..."
-              />
-            </div>
           </div>
         </section>
 
