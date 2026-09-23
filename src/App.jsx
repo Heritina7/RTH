@@ -11,31 +11,26 @@ import Contrat from "./Pages/Contrat";
 import Catalogue from "./Pages/Catalogue";
 import Blog from "./Pages/Blog";
 
-// Composant Loader circulaire avec contour tournant et texte R. TH
+// Composant Loader avec contour tournant et transparence pour laisser passer les clics
 function Loader() {
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gray-950 transition-opacity duration-500">
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gray-950/90 backdrop-blur-sm pointer-events-none transition-opacity duration-500">
       {/* Conteneur principal du cercle */}
       <div className="relative flex items-center justify-center w-44 h-44 sm:w-52 sm:h-52">
         
-        {/* 1. Contour tournant avec dégradé de bleu (effet de bordure rotative) */}
+        {/* 1. Contour tournant avec dégradé de bleu */}
         <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-600 via-cyan-400 to-transparent animate-spin p-[3px]">
-          {/* Fond intérieur du cercle pour masquer l'intérieur du dégradé */}
           <div className="w-full h-full bg-gray-900 rounded-full"></div>
         </div>
 
-        {/* 2. Cercle intérieur fixe (style sombre comme sur votre image) */}
+        {/* 2. Cercle intérieur fixe */}
         <div className="absolute inset-2 bg-gradient-to-b from-[#0b1d28] to-[#040e14] rounded-full flex flex-col items-center justify-center shadow-2xl border border-cyan-500/20">
-          
-          {/* Texte R. TH en blanc */}
           <span className="text-3xl sm:text-4xl font-extrabold tracking-widest text-white select-none">
             R. TH
           </span>
-          
         </div>
       </div>
 
-      {/* Petit texte de chargement discret */}
       <p className="mt-8 text-xs font-medium text-cyan-400/70 tracking-widest uppercase animate-pulse">
         Chargement...
       </p>
@@ -43,37 +38,23 @@ function Loader() {
   );
 }
 
-// Composant pour écouter les changements de routes (clics sur les liens)
+// Gestion des routes et du temps de chargement
 function AnimatedRoutes() {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
-    // Active le loader au premier plan lors du changement de route
+    // Active le loader à chaque changement de page
     setIsLoading(true);
 
-    const handleContentLoaded = () => {
-      // Petit délai de sécurité pour un rendu fluide
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 400);
-    };
+    // Sécurité garantie : le loader disparaît automatiquement après 800ms 
+    // pour éviter qu'il ne reste bloqué indéfiniment
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
 
-    if (document.readyState === 'complete') {
-      handleContentLoaded();
-    } else {
-      window.addEventListener('load', handleContentLoaded);
-      // Sécurité : enlève le loader après 1.2s max si le chargement traîne
-      const fallbackTimer = setTimeout(() => {
-        setIsLoading(false);
-      }, 1200);
-
-      return () => {
-        window.removeEventListener('load', handleContentLoaded);
-        clearTimeout(fallbackTimer);
-      };
-    }
-  }, [location.pathname]); // Se déclenche à chaque clic sur une autre page
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
 
   return (
     <>
