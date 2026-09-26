@@ -7,92 +7,122 @@ const ContactSimple = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen w-full bg-[#05161a] flex items-center justify-center p-4 md:p-10 font-sans overflow-hidden">
+    <div className="min-h-screen w-full bg-[#041416] flex items-center justify-center p-5 md:p-8 font-sans relative overflow-hidden">
       
-      {/* CERCLES DE FOND (DÉCORATIFS - EFFET NÉON) */}
-      <div className="absolute top-10 left-10 w-72 h-72 bg-cyan-900 rounded-full blur-[120px] opacity-40 animate-pulse" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-teal-900 rounded-full blur-[120px] opacity-30" />
+      {/* Ambient background lights */}
+      <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-cyan-900/30 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-[-15%] right-[-5%] w-[600px] h-[600px] bg-teal-900/25 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-cyan-800/10 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative w-full max-w-5xl h-auto md:h-[600px] bg-[#072e33]/40 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-cyan-800/30 flex flex-col md:flex-row overflow-hidden"
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="relative w-full max-w-5xl bg-[#0a1f23]/70 backdrop-blur-2xl rounded-[2rem] shadow-2xl shadow-black/40 border border-cyan-900/30 flex flex-col md:flex-row overflow-hidden"
       >
         
-        {/* SECTION GAUCHE : INFOS (CYAN PROFOND) */}
-        <div className="w-full md:w-2/5 bg-[#0c7075] p-10 text-white flex flex-col justify-between relative overflow-hidden">
-          {/* Motif subtil en arrière-plan */}
-          <div className="absolute -right-10 -top-10 opacity-10">
-            <MessageSquare size={200} />
+        {/* LEFT PANEL */}
+        <div className="w-full md:w-[42%] bg-gradient-to-br from-[#0d6b70] to-[#0a5559] p-9 md:p-11 text-white flex flex-col justify-between relative overflow-hidden">
+          
+          {/* Decorative icon */}
+          <div className="absolute -right-8 -bottom-8 opacity-[0.07]">
+            <MessageSquare size={220} strokeWidth={1} />
           </div>
 
           <div className="relative z-10">
             <button 
               onClick={() => navigate('/')}
-              className="flex items-center gap-2 text-sm font-medium mb-12 text-cyan-100 hover:text-white hover:translate-x-[-5px] transition-all"
+              className="group flex items-center gap-2 text-[13px] font-medium mb-14 text-cyan-100/80 hover:text-white transition-all duration-300"
             >
-              <ArrowLeft size={18} /> Retour au menu
+              <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform duration-300" />
+              Retour au menu
             </button>
-            <h1 className="text-4xl font-extrabold mb-4 tracking-tight">Parlons de demain.</h1>
-            <p className="text-cyan-100/80 text-sm leading-relaxed max-w-[250px]">
-              Une idée ? Un projet ? Remplissez le formulaire et créons quelque chose d'unique.
+
+            <h1 className="text-3xl md:text-[2.4rem] font-semibold tracking-tight leading-[1.15] mb-5">
+              Parlons de<br />demain.
+            </h1>
+            <p className="text-cyan-100/75 text-[15px] leading-relaxed max-w-[260px]">
+              Une idée ? Un projet ? Remplissez le formulaire et créons quelque chose d'unique ensemble.
             </p>
           </div>
 
-          <div className="space-y-6 relative z-10">
-            <div className="group flex items-center gap-4 text-sm uppercase tracking-[0.2em] font-bold text-cyan-100 cursor-pointer">
-                <div className="p-2 bg-cyan-800 rounded-lg group-hover:bg-cyan-400 group-hover:text-[#05161a] transition-colors">
-                    <Instagram size={20} />
-                </div>
-                <span>@rth_creation</span>
-            </div>
-            <div className="group flex items-center gap-4 text-sm font-medium text-cyan-50 cursor-pointer">
-                <div className="p-2 bg-cyan-800 rounded-lg group-hover:bg-cyan-400 group-hover:text-[#05161a] transition-colors">
-                    <Mail size={20} />
-                </div>
-                <span>rthheritina@gmail.com</span>
-            </div>
+          <div className="space-y-5 relative z-10 mt-12 md:mt-0">
+            <a 
+              href="https://instagram.com/rth_creation" 
+              target="_blank" 
+              rel="noreferrer"
+              className="group flex items-center gap-4 text-sm font-medium text-cyan-50/90 hover:text-white transition-colors duration-300"
+            >
+              <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-[#0a5559] transition-all duration-300">
+                <Instagram size={18} />
+              </div>
+              <span className="tracking-wide">@rth_creation</span>
+            </a>
+
+            <a 
+              href="mailto:rthheritina@gmail.com"
+              className="group flex items-center gap-4 text-sm font-medium text-cyan-50/90 hover:text-white transition-colors duration-300"
+            >
+              <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-[#0a5559] transition-all duration-300">
+                <Mail size={18} />
+              </div>
+              <span className="tracking-wide">rthheritina@gmail.com</span>
+            </a>
           </div>
         </div>
 
-        {/* SECTION DROITE : FORMULAIRE (MODE DARK) */}
-        <div className="w-full md:w-3/5 p-10 bg-[#051b20]/60 flex flex-col justify-center">
-          <form className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* RIGHT PANEL — FORM */}
+        <div className="w-full md:w-[58%] p-9 md:p-12 bg-[#061a1e]/50 flex flex-col justify-center">
+          
+          <div className="mb-8">
+            <h2 className="text-xl font-medium text-white tracking-tight">Envoyez un message</h2>
+            <p className="text-sm text-cyan-700/80 mt-1.5">Nous vous répondrons rapidement.</p>
+          </div>
+
+          <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-cyan-500/60 uppercase tracking-widest ml-1">Nom & Prénom</label>
+                <label className="text-[11px] font-medium text-cyan-600/70 uppercase tracking-[0.15em] ml-1">
+                  Nom & Prénom
+                </label>
                 <input 
                   type="text" 
-                  className="w-full bg-[#0a262b] border border-cyan-900/50 rounded-2xl p-4 text-sm text-cyan-50 focus:ring-2 focus:ring-cyan-500 transition-all outline-none placeholder:text-cyan-800" 
+                  className="w-full bg-[#0b2429] border border-cyan-900/40 rounded-xl px-4 py-3.5 text-sm text-cyan-50 placeholder:text-cyan-900/60 focus:outline-none focus:border-cyan-500/60 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-300" 
                   placeholder="Marc Doe" 
                 />
               </div>
+
               <div className="space-y-2">
-                <label className="text-xs font-bold text-cyan-500/60 uppercase tracking-widest ml-1">Email</label>
+                <label className="text-[11px] font-medium text-cyan-600/70 uppercase tracking-[0.15em] ml-1">
+                  Email
+                </label>
                 <input 
                   type="email" 
-                  className="w-full bg-[#0a262b] border border-cyan-900/50 rounded-2xl p-4 text-sm text-cyan-50 focus:ring-2 focus:ring-cyan-500 transition-all outline-none placeholder:text-cyan-800" 
+                  className="w-full bg-[#0b2429] border border-cyan-900/40 rounded-xl px-4 py-3.5 text-sm text-cyan-50 placeholder:text-cyan-900/60 focus:outline-none focus:border-cyan-500/60 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-300" 
                   placeholder="marc@mail.com" 
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold text-cyan-500/60 uppercase tracking-widest ml-1">Votre message</label>
+              <label className="text-[11px] font-medium text-cyan-600/70 uppercase tracking-[0.15em] ml-1">
+                Votre message
+              </label>
               <textarea 
-                rows="4" 
-                className="w-full bg-[#0a262b] border border-cyan-900/50 rounded-2xl p-4 text-sm text-cyan-50 focus:ring-2 focus:ring-cyan-500 transition-all outline-none resize-none placeholder:text-cyan-800" 
+                rows={4}
+                className="w-full bg-[#0b2429] border border-cyan-900/40 rounded-xl px-4 py-3.5 text-sm text-cyan-50 placeholder:text-cyan-900/60 focus:outline-none focus:border-cyan-500/60 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-300 resize-none" 
                 placeholder="Comment pouvons-nous vous aider ?" 
               />
             </div>
 
             <motion.button 
-              whileHover={{ scale: 1.02, boxShadow: "0px 0px 20px rgba(6, 182, 212, 0.4)" }}
+              whileHover={{ scale: 1.015 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full py-4 bg-[#0f969c] text-[#05161a] font-black uppercase tracking-widest rounded-2xl flex items-center justify-center gap-3 hover:bg-cyan-400 transition-all shadow-lg"
+              type="submit"
+              className="w-full mt-2 py-4 bg-[#0f969c] hover:bg-cyan-400 text-[#041416] font-semibold tracking-wide rounded-xl flex items-center justify-center gap-2.5 transition-colors duration-300 shadow-lg shadow-cyan-900/20"
             >
-              Envoyer le message <Send size={18} />
+              Envoyer le message
+              <Send size={16} />
             </motion.button>
           </form>
         </div>

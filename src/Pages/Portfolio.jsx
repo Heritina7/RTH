@@ -271,7 +271,6 @@ export default function Produit() {
     { nom: "APPLICATION WEB" },
     { nom: "APP MOBILE" },
     { nom: "DEV SPECIFIQUE" },
-    { nom: "GALERIE" },
   ];
 
   const services = [
